@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+
+<configuration>
+	<server port="2001" max="500">
+		<keyStore>
+			<file>keystore.jks</file>
+			<type>JKS</type>
+			<password>wso2carbon</password>
+		</keyStore>
+		<trustStore>
+			<file>client-truststore.jks</file>
+			<type>JKS</type>
+			<password>wso2carbon</password>
+		</trustStore>
+	</server>
+</configuration>
