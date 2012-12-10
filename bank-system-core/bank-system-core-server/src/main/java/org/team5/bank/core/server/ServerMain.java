@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class ServerMain {
 	
-	private static Log log = LogFactory.getLog(ServerWorker.class); 
+	private static Log log = LogFactory.getLog(ServerMain.class); 
 
 	public static void main(String[] args) {
 		

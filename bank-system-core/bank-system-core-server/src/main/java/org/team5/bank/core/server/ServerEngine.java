@@ -25,7 +25,7 @@ import org.apache.commons.logging.LogFactory;
 
 public class ServerEngine {
 	
-	private static Log log = LogFactory.getLog(ServerWorker.class); 
+	private static Log log = LogFactory.getLog(ServerEngine.class); 
 	private XMLConfiguration config;
 	
 	public ServerEngine(XMLConfiguration config){
