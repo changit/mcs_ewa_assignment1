@@ -13,6 +13,7 @@
 
     <modules>
         <module>simulators</module>
+	<module>bank-system-core</module>
     </modules>
 
 </project>
