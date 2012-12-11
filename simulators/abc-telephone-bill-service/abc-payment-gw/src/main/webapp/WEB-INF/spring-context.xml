@@ -8,6 +8,22 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
     <jaxws:endpoint
             implementor="abc.payment.PaymentServiceImpl"
-            address="/PayBill" />
+            address="/PayBill">
+
+
+        <jaxws:inInterceptors>
+            <bean class="org.apache.cxf.binding.soap.saaj.SAAJInInterceptor"/>
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JInInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackClass" value="abc.sec.ServerPasswordCallback"/>
+                    </map>
+                </constructor-arg>
+            </bean>
+        </jaxws:inInterceptors>
+    </jaxws:endpoint>
+
 
 </beans>

@@ -6,9 +6,40 @@
 http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
+    <import resource="classpath:META-INF/cxf/cxf.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-extension-soap.xml" />
+    <import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
     <jaxws:client id="paymentService"
                   serviceClass="abc.payment.PaymentService"
-                  address="http://localhost:8080/abc-payment-gw/PayBill"/>
+                  address="http://localhost:8080/abc-payment-gw/PayBill">
 
+        <!--<jaxws:properties>-->
+            <!--<entry key="ws-security.callback-handler" value="sec.ClientPasswordCallback"/>-->
+            <!--<entry key="ws-security.encryption.properties" value="client_sign.properties"/>-->
+        <!--</jaxws:properties>-->
+
+
+
+
+        <jaxws:outInterceptors>
+
+            <bean class="org.apache.cxf.ws.security.wss4j.WSS4JOutInterceptor">
+                <constructor-arg>
+                    <map>
+                        <entry key="action" value="UsernameToken"/>
+                        <entry key="user" value="joe"/>
+                        <entry key="passwordType" value="PasswordText"/>
+                        <entry key="passwordCallbackClass" value="sec.ClientPasswordCallback"/>
+                    </map>
+                </constructor-arg>
+
+
+
+            </bean>
+        </jaxws:outInterceptors>
+    </jaxws:client>
+
+    <bean id="myPasswordCallback"
+          class="sec.ClientPasswordCallback"/>
 </beans>

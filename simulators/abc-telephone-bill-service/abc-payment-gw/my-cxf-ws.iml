@@ -18,6 +18,9 @@
     <orderEntry type="library" name="Maven: org.springframework:spring-context:3.0.5.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.0.7.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.0.7.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-log4j12:1.6.6" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.6" level="project" />
+    <orderEntry type="library" name="Maven: log4j:log4j:1.2.17" level="project" />
     <orderEntry type="library" name="Maven: org.apache.cxf:cxf-bundle:2.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.velocity:velocity:1.7" level="project" />
     <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
@@ -45,7 +48,6 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-io:7.5.4.v20111024" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-util:7.5.4.v20111024" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-security:7.5.4.v20111024" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.6.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-servlet_2.5_spec:1.1.2" level="project" />
     <orderEntry type="library" name="Maven: org.apache.geronimo.specs:geronimo-jms_1.1_spec:1.1.1" level="project" />
     <orderEntry type="library" name="Maven: org.springframework:spring-jms:3.0.7.RELEASE" level="project" />
