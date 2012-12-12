@@ -41,7 +41,7 @@
                         <id>process-classes</id>
                         <phase>install</phase>
                         <configuration>
-                            <className>com.sri.AuthService</className>
+                            <className>com.sri.service.AuthService</className>
                             <genWsdl>true</genWsdl>
                             <verbose>true</verbose>
                         </configuration>

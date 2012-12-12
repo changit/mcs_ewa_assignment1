@@ -1,4 +1,4 @@
-package com.sri;
+package com.sri.service;
 
 import javax.jws.WebService;
 

@@ -1,6 +1,6 @@
 package abc.payment.client;
 
-import com.sri.AuthService;
+import com.sri.service.AuthService;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 

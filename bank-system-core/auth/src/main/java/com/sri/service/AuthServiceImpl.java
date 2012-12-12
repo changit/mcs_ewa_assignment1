@@ -1,4 +1,4 @@
-package com.sri;
+package com.sri.service;
 
 import javax.jws.WebService;
 
@@ -6,7 +6,7 @@ import javax.jws.WebService;
  * User: Gihan Anuruddha
  * Date: 12/10/12
  */
-@WebService(endpointInterface = "com.sri.AuthService")
+@WebService(endpointInterface = "com.sri.service.AuthService")
 public class AuthServiceImpl implements AuthService {
 
     @Override

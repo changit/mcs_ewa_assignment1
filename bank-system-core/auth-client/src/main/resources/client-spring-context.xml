@@ -8,7 +8,7 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
 
     <jaxws:client id="authService"
-                  serviceClass="com.sri.AuthService"
+                  serviceClass="com.sri.service.AuthService"
                   address="http://localhost:8080/bank-system-core-auth/AuthSer"/>
 
 </beans>
