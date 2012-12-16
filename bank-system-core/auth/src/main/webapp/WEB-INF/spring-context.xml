@@ -9,7 +9,7 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
     <import resource="spring-data-context.xml"/>
 
     <jaxws:endpoint
-            implementor="com.sri.service.AuthServiceImpl"
+            implementor="com.sri.service.impl.AuthServiceImpl"
             address="/AuthSer"/>
 
 

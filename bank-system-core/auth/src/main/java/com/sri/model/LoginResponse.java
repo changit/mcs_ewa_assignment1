@@ -1,5 +1,8 @@
 package com.sri.model;
 
+import org.apache.commons.lang.builder.ToStringBuilder;
+import org.apache.commons.lang.builder.ToStringStyle;
+
 import java.io.Serializable;
 
 /**
@@ -14,6 +17,7 @@ public class LoginResponse implements Serializable {
     private String loginToken;
     private String[] roles;
     private String result;
+    private String errorMsg;
 
     public LoginResponse() {
     }
@@ -50,8 +54,16 @@ public class LoginResponse implements Serializable {
         this.result = result;
     }
 
+    public String getErrorMsg() {
+        return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
+    }
+
     @Override
     public String toString() {
-        return "LoginResponse{UserId:" + userId + ", LoginToken:" + loginToken + ", Result:" + result + "}";
+        return ToStringBuilder.reflectionToString(this, ToStringStyle.MULTI_LINE_STYLE);
     }
 }

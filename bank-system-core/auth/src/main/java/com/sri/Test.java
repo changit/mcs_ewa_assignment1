@@ -1,13 +1,10 @@
 package com.sri;
 
-import com.sri.dao.UserDao;
-import com.sri.dao.domain.User;
+import com.sri.model.User;
 import com.sri.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowire;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Repository;
 
 /**
  * Created with IntelliJ IDEA.
@@ -24,12 +21,12 @@ public class Test {
     UserService userService;
 
     public void init() {
-         User user = new User();
-         user.setUserName("XXX");
-         userService.createUser(user);
+        User user = new User();
 
-        User foundUser= userService.findUserByUserName("XXX");
+        user.setUserName("XXX");
+        userService.createUser(user);
+
+        User foundUser = userService.findUserByUserName("XXX");
         logger.info("Found Entity [{}] ", foundUser.getUserName());
-
     }
 }

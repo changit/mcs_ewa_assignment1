@@ -75,8 +75,12 @@
 
     <bean id="userDao" class="com.sri.dao.impl.UserDaoImpl"/>
 
-    <bean id="userService" class="com.sri.service.UserServiceImpl" />
+    <bean id="userService" class="com.sri.service.impl.UserServiceImpl" />
 
-    <bean id="removeMe" class="com.sri.Test" init-method="init"/>
+    <!--<bean id="removeMe" class="com.sri.Test" init-method="init"/>-->
+
+    <bean id="loginTokenManager" class="com.sri.service.impl.LoginTokenManagerImpl"/>
+
+    <bean id="loginTokenDao" class="com.sri.dao.impl.LoginTokenDaoImpl"/>
 
 </beans>

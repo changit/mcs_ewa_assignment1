@@ -8,7 +8,9 @@ http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd"
 
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
 
-        <class>com.sri.dao.domain.User</class>
+        <class>com.sri.model.User</class>
+        <class>com.sri.model.Role</class>
+        <class>com.sri.model.LoginToken</class>
 
     </persistence-unit>
 

@@ -10,6 +10,6 @@ public class SimpleClient {
         ApplicationContext context = new ClassPathXmlApplicationContext("classpath*:client-spring-context.xml");
         AuthService authService = (AuthService) context.getBean("authService");
 
-        System.out.println("authService.login() = " + authService.authenticate("gihan", "test"));
+        System.out.println("authService.login() = " + authService.authenticate("gihan1", "test"));
     }
 }

@@ -1,7 +1,8 @@
-package com.sri.service;
+package com.sri.service.impl;
 
 import com.sri.dao.UserDao;
-import com.sri.dao.domain.User;
+import com.sri.model.User;
+import com.sri.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -12,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
  * Time: 10:57 PM
  * To change this template use File | Settings | File Templates.
  */
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserDao userDao;
@@ -26,5 +27,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public User findUserByUserName(String userName) {
         return userDao.findUserByUserName(userName);
+    }
+
+    @Override
+    @Transactional
+    public void deleteUser(User user) {
+        userDao.removeUser(user);
     }
 }

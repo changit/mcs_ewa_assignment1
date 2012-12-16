@@ -1,6 +1,6 @@
 package com.sri.dao;
 
-import com.sri.dao.domain.User;
+import com.sri.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -14,4 +14,6 @@ public interface UserDao {
     void createUser(User user);
 
     User findUserByUserName(String userName);
+
+    void removeUser(User user);
 }

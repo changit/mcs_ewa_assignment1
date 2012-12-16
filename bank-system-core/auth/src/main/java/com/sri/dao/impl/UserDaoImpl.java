@@ -1,7 +1,7 @@
 package com.sri.dao.impl;
 
 import com.sri.dao.UserDao;
-import com.sri.dao.domain.User;
+import com.sri.model.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -32,6 +32,11 @@ public class UserDaoImpl implements UserDao {
         Query query = em.createQuery(selectUserByUserNameQuery);
         query.setParameter("userName", userName);
         return (User) query.getSingleResult();
+    }
+
+    @Override
+    public void removeUser(User user) {
+        em.remove(user);
     }
 
 

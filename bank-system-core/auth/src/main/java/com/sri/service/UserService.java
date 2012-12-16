@@ -1,7 +1,6 @@
 package com.sri.service;
 
-import com.sri.dao.domain.User;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.sri.model.User;
 
 /**
  * Created with IntelliJ IDEA.
@@ -15,4 +14,6 @@ public interface UserService {
     void createUser(User user);
 
     User findUserByUserName(String userName);
+
+    void deleteUser(User user);
 }
