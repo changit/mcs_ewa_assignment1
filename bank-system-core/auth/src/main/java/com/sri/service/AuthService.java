@@ -2,6 +2,7 @@ package com.sri.service;
 
 import com.sri.model.LoginResponse;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
@@ -11,5 +12,5 @@ import javax.jws.WebService;
 @WebService(targetNamespace = "http://localhost:8080/bank-system-core-auth")
 public interface AuthService {
 
-    LoginResponse authenticate(String username, String passwordHash);
+    LoginResponse authenticate(@WebParam(name = "userName") String username, @WebParam(name = "hash") String passwordHash);
 }
