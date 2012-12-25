@@ -1,14 +1,8 @@
 package org.team5.bank.core.server.service;
 
 import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.team5.bank.core.server.service.model.Account;
 import org.team5.bank.core.server.service.model.WSResult;
 import org.team5.bank.core.server.service.model.WSResult.Status;
 import org.team5.bank.core.server.service.model.WebService;
@@ -20,21 +14,8 @@ public class ServiceInvoker {
 	
 	static{
 		serviceClasses.put("deposit", new DepositService());
+		serviceClasses.put("withdraw", new WithdrawService());
 	}
-	
-	/*public void Test(){
-		  SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
-	        Session session = sessionFactory.getCurrentSession();
-	        Transaction tx = session.beginTransaction();
-	        @SuppressWarnings("unchecked")
-			List<Account> accounts = session.createQuery("from Account").list();
-	        for (Account account : accounts) {
-	            System.out.println("Id=" + account.getId());
-	            System.out.println("UserId=" + account.getUserId());
-	            System.out.println("AccountNo=" + account.getAccountNo());
-	            System.out.println("Balance=" + account.getBalance());
-	        }
-	}*/
 	
 	public WSResult invokeService(String action, Map<String,String> param){
 		WSResult result = null;

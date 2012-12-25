@@ -17,6 +17,12 @@ public class DepositService implements WebService {
 		Map<String, String> data = new HashMap<String, String>();
 		String accountNo = param.get("accountNo");
 		if(accountNo!=null && param.get("amount")!=null){
+			Double amount= 0.0;
+			try {
+				amount = Math.abs(Double.parseDouble(param.get("amount")));
+			} catch (NumberFormatException e) {
+				throw new ServiceException("Amount is not a number!");
+			}
 			SessionFactory sessionFactory = HibernateUtil.getSessionFactory();
 	        Session session = sessionFactory.getCurrentSession();
 	        Transaction tx = session.beginTransaction();
@@ -25,7 +31,7 @@ public class DepositService implements WebService {
 	        Account account = (Account) query.uniqueResult();
 	        if(account!=null){
 	        	double balance = account.getBalance();
-	 	        balance+=Double.parseDouble(param.get("amount"));
+	 	        balance+=amount;
 	 			account.setBalance(balance);
 	 			session.save(account);
 	 			tx.commit();
