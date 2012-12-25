@@ -15,6 +15,7 @@ public class ServiceInvoker {
 	static{
 		serviceClasses.put("deposit", new DepositService());
 		serviceClasses.put("withdraw", new WithdrawService());
+		serviceClasses.put("fundTransfer", new FundTransferWebService());
 	}
 	
 	public WSResult invokeService(String action, Map<String,String> param){
