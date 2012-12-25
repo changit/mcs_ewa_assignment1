@@ -7,9 +7,14 @@ import java.io.PrintWriter;
 import java.io.Reader;
 import java.net.Socket;
 import java.util.Arrays;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log; 
 import org.apache.commons.logging.LogFactory;
+import org.team5.bank.core.server.service.ServiceInvoker;
+import org.team5.bank.core.server.service.model.WSResult;
+import org.team5.bank.core.server.service.model.WSResult.Status;
 
 public class ServerWorker implements Runnable {
 	
@@ -71,24 +76,49 @@ public class ServerWorker implements Runnable {
 	}
 	
 	private String processRequest(String request){
-		
+		String action = null;
+		WSResult result = null;
+		Map<String,String> params = new LinkedHashMap<String, String>();
 		StringBuffer responseBuffer = new StringBuffer ();
 		
-		//FIXME : implement real logic 
-		responseBuffer.append("success");
-		responseBuffer.append(",");
-		responseBuffer.append("responseData1");
-		responseBuffer.append(",");
-		responseBuffer.append("responseData2");
-		responseBuffer.append(",");
-		responseBuffer.append("responseData3");
-		responseBuffer.append(",");
-		responseBuffer.append("responseData4");
-		responseBuffer.append(",");
-		responseBuffer.append("responseData5");
-		responseBuffer.append(",");
+		String[] keyValuePairs = request.split(",");
+		for (String keyValuePair : keyValuePairs) {
+			String key = keyValuePair.split("=")[0];
+			String value = keyValuePair.split("=")[1];
+			if("action".equals(key)){
+				action = value;
+			} else{
+				params.put(key, value);
+			}
+		}
+		if(action!=null && !action.trim().isEmpty()){
+			ServiceInvoker invoker = new ServiceInvoker();
+			result = invoker.invokeService(action, params);
+		}
 		
-		return responseBuffer.toString();
+		if(result==null){
+			result = new WSResult();
+			result.setStatus(Status.FAILED);
+			result.setErrorMsg("no action specified");
+			action= "error";
+		}
+		
+		responseBuffer.append("action=");
+		responseBuffer.append(action);
+		responseBuffer.append("Response");
+		responseBuffer.append(",");
+		if(result.getStatus()==Status.SUCCESS){
+			responseBuffer.append("status=success");
+			responseBuffer.append(",");
+			responseBuffer.append(result.getValues());
+		} else{
+			responseBuffer.append("status=failed");
+			responseBuffer.append(",");
+			responseBuffer.append("error=" + result.getErrorMsg() );
+			responseBuffer.append(",");
+		}
+		
+		return responseBuffer.toString().replaceAll(",$", "");
 	}
 
 }

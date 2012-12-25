@@ -4,6 +4,7 @@ package org.team5.bank.core.server;
 import org.apache.commons.configuration.XMLConfiguration;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.team5.bank.core.server.service.ServiceInvoker;
 
 public class ServerMain {
 	
