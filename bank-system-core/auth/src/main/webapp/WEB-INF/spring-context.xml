@@ -10,7 +10,9 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
 
     <jaxws:endpoint
             implementor="com.sri.service.impl.AuthServiceImpl"
-            address="/AuthSer"/>
+            address="/AuthSer"
+            publish="true"
+            />
 
 
     <bean id="propertyConfigurer"
