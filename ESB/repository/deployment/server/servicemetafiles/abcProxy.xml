@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup name="abcProxy" successfullyAdded="true">
+   <service name="abcProxy"
+            exposedAllTransports="false"
+            serviceDeployedTime="1354437248191"
+            successfullyAdded="true">
+      <operation name="mediate">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <bindings>
+         <binding name="abcProxySoap12Binding">
+            <operation name="mediate"/>
+         </binding>
+         <binding name="abcProxyHttpBinding">
+            <operation name="mediate"/>
+         </binding>
+         <binding name="abcProxySoap11Binding">
+            <operation name="mediate"/>
+         </binding>
+      </bindings>
+      <policies/>
+      <module name="usagethrottling" version="2.0" type="engagedModules"/>
+      <module name="activation" version="2.0" type="engagedModules"/>
+      <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+      <module name="addressing" version="4.0" type="engagedModules"/>
+      <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+      <module name="wso2statistics" version="4.1" type="engagedModules"/>
+      <module name="metering" version="2.1" type="engagedModules"/>
+      <parameter name="serviceType" type="1">proxy</parameter>
+      <association destinationPath="/repository/transports/https/listener"
+                   type="exposedTransports"/>
+      <association destinationPath="/repository/transports/http/listener"
+                   type="exposedTransports"/>
+   </service>
+</serviceGroup>

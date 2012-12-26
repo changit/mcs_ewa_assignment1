@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<serviceGroup name="calloutTCP" successfullyAdded="true">
+   <service name="calloutTCP"
+            serviceDocumentation="echo"
+            exposedAllTransports="false"
+            serviceDeployedTime="1354519003300"
+            successfullyAdded="true">
+      <bindings>
+         <binding name="calloutTCPSoap11Binding">
+            <operation name="getVersion"/>
+            <operation name="echoString"/>
+            <operation name="throwAxisFault"/>
+            <operation name="echoStringArrays"/>
+            <operation name="echoOMElement"/>
+            <operation name="echoInt"/>
+         </binding>
+         <binding name="calloutTCPHttpBinding">
+            <operation name="getVersion"/>
+            <operation name="echoString"/>
+            <operation name="throwAxisFault"/>
+            <operation name="echoStringArrays"/>
+            <operation name="echoOMElement"/>
+            <operation name="echoInt"/>
+         </binding>
+         <binding name="calloutTCPSoap12Binding">
+            <operation name="getVersion"/>
+            <operation name="echoString"/>
+            <operation name="throwAxisFault"/>
+            <operation name="echoStringArrays"/>
+            <operation name="echoOMElement"/>
+            <operation name="echoInt"/>
+         </binding>
+      </bindings>
+      <policyUUID>urn:version</policyUUID>
+      <policies>
+         <policy policyType="3">
+            <policyUUID>urn:version</policyUUID>
+            <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                        xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                        Name="urn:version"
+                        wsu:Id="urn:version">
+               <wsp:ExactlyOne>
+                  <wsp:All>
+                     <intf:ServicePolicyTestAssertion1 xmlns:intf="http://test.policy.org/wsas" marker="2"/>
+                  </wsp:All>
+               </wsp:ExactlyOne>
+            </wsp:Policy>
+         </policy>
+         <policy policyType="4">
+            <policyUUID>cc5bb53b3b9edcb576c3cdf55292831bb88f8ebf55bb6cf8</policyUUID>
+            <wsp:Policy xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy"
+                        xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd"
+                        wsu:Id="cc5bb53b3b9edcb576c3cdf55292831bb88f8ebf55bb6cf8">
+               <wsp:ExactlyOne>
+                  <wsp:All>
+                     <intf:OperationPolicyTestAssertion1 xmlns:intf="http://test.policy.org/wsas" marker="2"/>
+                  </wsp:All>
+               </wsp:ExactlyOne>
+            </wsp:Policy>
+         </policy>
+      </policies>
+      <module name="usagethrottling" version="2.0" type="engagedModules"/>
+      <module name="activation" version="2.0" type="engagedModules"/>
+      <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+      <module name="addressing" version="4.0" type="engagedModules"/>
+      <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+      <module name="wso2statistics" version="4.1" type="engagedModules"/>
+      <module name="metering" version="2.1" type="engagedModules"/>
+      <parameter name="serviceType" type="1">proxy</parameter>
+      <parameter name="interface" type="1">echoPortType</parameter>
+      <operation name="echoString">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <operation name="throwAxisFault">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <operation name="echoStringArrays">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <operation name="echoOMElement">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <operation name="echoInt">
+         <module name="usagethrottling" version="2.0" type="engagedModules"/>
+         <module name="activation" version="2.0" type="engagedModules"/>
+         <module name="POXSecurityModule" version="4.1" type="engagedModules"/>
+         <module name="addressing" version="4.0" type="engagedModules"/>
+         <module name="ServerAdminModule" version="4.1" type="engagedModules"/>
+         <module name="wso2statistics" version="4.1" type="engagedModules"/>
+         <module name="metering" version="2.1" type="engagedModules"/>
+      </operation>
+      <association destinationPath="/repository/transports/https/listener"
+                   type="exposedTransports"/>
+      <association destinationPath="/repository/transports/http/listener"
+                   type="exposedTransports"/>
+   </service>
+</serviceGroup>
