@@ -29,6 +29,8 @@ public class User implements Serializable{
     private String userName;
     @Column(length = 50)
     private String password;
+    private boolean accountLock;
+    private int invalidPasswordCount;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -68,6 +70,22 @@ public class User implements Serializable{
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isAccountLock() {
+        return accountLock;
+    }
+
+    public void setAccountLock(boolean accountLock) {
+        this.accountLock = accountLock;
+    }
+
+    public int getInvalidPasswordCount() {
+        return invalidPasswordCount;
+    }
+
+    public void setInvalidPasswordCount(int invalidPasswordCount) {
+        this.invalidPasswordCount = invalidPasswordCount;
     }
 
     @Override
