@@ -33,6 +33,6 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
         </property>
     </bean>
 
-    <bean id="test" class="org.team5.portal.Test" init-method="init"/>
+    <bean id="test" class="org.team5.portal.service.impl.LegacyServiceMessageTransformer" />
 
 </beans>
