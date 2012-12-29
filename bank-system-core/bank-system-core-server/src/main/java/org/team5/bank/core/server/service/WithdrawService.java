@@ -1,5 +1,6 @@
 package org.team5.bank.core.server.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,8 +38,15 @@ public class WithdrawService implements WebService {
 	        		balance-=amount;
 	 	 			account.setBalance(balance);
 	 	 			session.save(account);
-	 	 			tx.commit();
-	 	 			data.put("return", "true");
+		 			org.team5.bank.core.server.service.model.Transaction transaction = new org.team5.bank.core.server.service.model.Transaction();
+		 			transaction.setFromAccount(account.getAccountNo());
+		 			transaction.setToAccount(account.getAccountNo());
+		 			transaction.setAmount(amount);
+		 			transaction.setType("withdraw");
+		 			transaction.setTimeStamp(new Date());
+		 			session.save(transaction);
+		 			tx.commit();
+		 			data.put("transactionID", transaction.getId().toString());
 	        	} else{
 	        		throw new ServiceException("Account has insufficient funds");
 	        	}

@@ -1,5 +1,6 @@
 package org.team5.bank.core.server.service;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -46,8 +47,15 @@ public class FundTransferService implements WebService {
 						accountTo.setBalance(payeeBalance);
 						session.save(accountFrom);
 						session.save(accountTo);
-						tx.commit();
-						data.put("return", "true");
+						org.team5.bank.core.server.service.model.Transaction transaction = new org.team5.bank.core.server.service.model.Transaction();
+			 			transaction.setFromAccount(accountFrom.getAccountNo());
+			 			transaction.setToAccount(accountTo.getAccountNo());
+			 			transaction.setAmount(amount);
+			 			transaction.setType("transfer");
+			 			transaction.setTimeStamp(new Date());
+			 			session.save(transaction);
+			 			tx.commit();
+			 			data.put("transactionID", transaction.getId().toString());
 					} catch (Exception e) {
 						tx.rollback();
 						throw new ServiceException("unknown error occurred: " + e);

@@ -9,5 +9,6 @@
     <property name="hibernate.connection.password">root</property>
     <property name="current_session_context_class">thread</property>
     <mapping class="org.team5.bank.core.server.service.model.Account"/>
+    <mapping class="org.team5.bank.core.server.service.model.Transaction"/>
   </session-factory>
 </hibernate-configuration>
