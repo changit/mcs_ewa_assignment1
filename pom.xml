@@ -9,6 +9,7 @@
 
     <properties>
         <spring-version>3.0.5.RELEASE</spring-version>
+        <cxf-version>2.6.2</cxf-version>
     </properties>
 
     <modules>

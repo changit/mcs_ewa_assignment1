@@ -39,7 +39,6 @@
 
     <modules>
         <module>abc-payment-gw</module>
-        <module>abc-payment-gw-client</module>
     </modules>
 
 </project>

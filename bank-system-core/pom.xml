@@ -24,7 +24,8 @@
     <modules>
         <module>bank-system-core-server</module>
         <module>auth</module>
-        <module>auth-client</module>
+        <module>portal-core</module>
+        <module>utility-bill-service</module>
     </modules>
 
 </project>
