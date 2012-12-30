@@ -78,7 +78,7 @@
                             <sourceRoot>${project.build.sourceDirectory}</sourceRoot>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://54.235.192.119:8280/services/CoreService?wsdl</wsdl>
+                                    <wsdl>http://10.225.40.175:8280/services/CoreService?wsdl</wsdl>
                                     <wsdl>http://ec2-67-202-56-114.compute-1.amazonaws.com:20080/bank-system-core-auth/AuthSer?wsdl</wsdl>
                                 </wsdlOption>
                             </wsdlOptions>

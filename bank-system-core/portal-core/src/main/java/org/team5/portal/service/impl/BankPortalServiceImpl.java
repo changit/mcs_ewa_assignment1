@@ -5,12 +5,14 @@ import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.team5.portal.FormatUtil;
+import org.team5.portal.data.Account;
 import org.team5.portal.data.FundTransferCode;
 import org.team5.portal.data.FundTransferRequest;
 import org.team5.portal.data.FundTransferResponse;
 import org.team5.portal.data.Transaction;
 import org.team5.portal.service.BankPortalService;
 
+import javax.jws.WebParam;
 import javax.jws.WebService;
 import java.util.ArrayList;
 import java.util.Date;
@@ -40,8 +42,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         //TODO authenticate validation
         //authService.checkTransactionId
 
-//        FundTransfer fundTransfer = legacyTransformer.toFundTransfer(request);
-//        legacyService.fundTransfer()
+        String fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
 
         FundTransferResponse fundTransferResponse = new FundTransferResponse();
         fundTransferResponse.setDescription("Money Transferred successfully");
@@ -69,5 +70,15 @@ public class BankPortalServiceImpl implements BankPortalService {
         transactionList.add(transaction1);
         transactionList.add(transaction2);
         return transactionList;
+    }
+    
+    @Override
+	public  List<Account> getAccountList(String userId){
+    	List<Account> accountList = new ArrayList<Account>();
+    	Account account= new Account();
+    	account.setUserId(userId);
+    	account.setAccountNo("1212121212121");
+    	account.setAccountName("Saving account");
+    	return accountList;
     }
 }

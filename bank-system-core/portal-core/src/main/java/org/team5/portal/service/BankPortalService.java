@@ -1,6 +1,7 @@
 package org.team5.portal.service;
 
 import org.iso8583.payload.FundTransfer;
+import org.team5.portal.data.Account;
 import org.team5.portal.data.FundTransferRequest;
 import org.team5.portal.data.FundTransferResponse;
 import org.team5.portal.data.Transaction;
@@ -20,8 +21,10 @@ import java.util.List;
 @WebService(targetNamespace = "http://org.sribank.com/portal")
 public interface BankPortalService {
 
-    FundTransferResponse transfer(FundTransferRequest request);
+    FundTransferResponse transfer(@WebParam(name="request") FundTransferRequest request);
 
     List<Transaction> getAccountHistory(@WebParam(name = "accountNumber") String accountNo);
+    
+    List<Account> getAccountList(@WebParam(name = "userId") String userId);
 
 }

@@ -35,19 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Authenticate }
-     * 
-     */
-    public Authenticate createAuthenticate() {
-        return new Authenticate();
-    }
-
-    /**
      * Create an instance of {@link AuthenticateResponse }
      * 
      */
     public AuthenticateResponse createAuthenticateResponse() {
         return new AuthenticateResponse();
+    }
+
+    /**
+     * Create an instance of {@link Authenticate }
+     * 
+     */
+    public Authenticate createAuthenticate() {
+        return new Authenticate();
     }
 
     /**
