@@ -108,10 +108,11 @@ public class ServerWorker implements Runnable {
 		responseBuffer.append("Response");
 		responseBuffer.append(",");
 		if(result.getStatus()==Status.SUCCESS){
-			responseBuffer.append("status=success");
+			responseBuffer.append("sys:status=success");
 			responseBuffer.append(",");
 			responseBuffer.append(result.getValues());
 		} else{
+			responseBuffer.append("sys:status=failed");
 			responseBuffer.append("status=failed");
 			responseBuffer.append(",");
 			responseBuffer.append("error=" + result.getErrorMsg() );

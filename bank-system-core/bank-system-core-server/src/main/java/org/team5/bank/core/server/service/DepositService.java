@@ -44,6 +44,7 @@ public class DepositService implements WebService {
 	 			session.save(transaction);
 	 			tx.commit();
 	 			data.put("transactionID", transaction.getId().toString());
+	 			data.put("status", "success");
 	        } else{
 	        	throw new ServiceException("Cannot find account with identifier '" + accountNo + "'");
 	        }

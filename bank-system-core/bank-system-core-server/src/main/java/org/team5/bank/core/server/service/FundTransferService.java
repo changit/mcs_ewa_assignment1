@@ -56,6 +56,7 @@ public class FundTransferService implements WebService {
 			 			session.save(transaction);
 			 			tx.commit();
 			 			data.put("transactionID", transaction.getId().toString());
+			 			data.put("status", "success");
 					} catch (Exception e) {
 						tx.rollback();
 						throw new ServiceException("unknown error occurred: " + e);
