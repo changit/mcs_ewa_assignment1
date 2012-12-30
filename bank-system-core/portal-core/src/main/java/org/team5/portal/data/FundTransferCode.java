@@ -9,7 +9,7 @@ package org.team5.portal.data;
  */
 public enum FundTransferCode {
     SUCCESS_0000,
-    FAILED_0001,
+    FAILED_0001, // unauthorized
     FAILED_0002,
     FAILED_0003;
 }

@@ -1,6 +1,7 @@
 package org.team5.portal.service.impl;
 
 import localhost._8080.bank_system_core_auth.AuthService;
+import localhost._8080.bank_system_core_auth.UserNotFoundException_Exception;
 import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,16 +40,27 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
     public FundTransferResponse transfer(FundTransferRequest request) {
-        //TODO authenticate validation
-        //authService.checkTransactionId
-
-        String fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
 
         FundTransferResponse fundTransferResponse = new FundTransferResponse();
-        fundTransferResponse.setDescription("Money Transferred successfully");
-        fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
-        fundTransferResponse.setTransactionId("1597538264");
-        fundTransferResponse.setSourceId(request.getRequestId());
+        boolean authorized = false;
+        try {
+            authorized = authService.verifyToken(request.getUserId(), request.getLoginToken());
+        } catch (UserNotFoundException_Exception e) {
+            fundTransferResponse.setResultCode(FundTransferCode.FAILED_0001);
+            fundTransferResponse.setDescription("Invalid user.");
+        }
+
+        if (authorized) {
+            String fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
+
+            fundTransferResponse.setDescription("Money Transferred successfully");
+            fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
+            fundTransferResponse.setTransactionId("1597538264");
+            fundTransferResponse.setSourceId(request.getRequestId());
+        } else {
+            fundTransferResponse.setResultCode(FundTransferCode.FAILED_0001);
+            fundTransferResponse.setDescription("Invalid login token.");
+        }
         return fundTransferResponse;
     }
 

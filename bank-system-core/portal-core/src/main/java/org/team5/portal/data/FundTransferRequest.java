@@ -9,6 +9,7 @@ package org.team5.portal.data;
  */
 public class FundTransferRequest {
 
+    private Long userId;
     private String requestId;
     private String fromAccount;
     private String toAccount;
@@ -62,5 +63,13 @@ public class FundTransferRequest {
 
     public void setRequestId(String requestId) {
         this.requestId = requestId;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 }
