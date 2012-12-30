@@ -1,11 +1,13 @@
 
 package org.iso8583.payload;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.team5.bank.core.server.service.model.xsd.TransactionResponse;
 
 
 /**
@@ -18,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}boolean" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://model.service.server.core.bank.team5.org/xsd}TransactionResponse" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -34,18 +36,18 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement(name = "withdrawResponse")
 public class WithdrawResponse {
 
-    @XmlElement(name = "return")
-    protected Boolean _return;
+    @XmlElementRef(name = "return", namespace = "http://iso8583.org/payload", type = JAXBElement.class)
+    protected JAXBElement<TransactionResponse> _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link Boolean }
+     *     {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}
      *     
      */
-    public Boolean isReturn() {
+    public JAXBElement<TransactionResponse> getReturn() {
         return _return;
     }
 
@@ -54,11 +56,11 @@ public class WithdrawResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link Boolean }
+     *     {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}
      *     
      */
-    public void setReturn(Boolean value) {
-        this._return = value;
+    public void setReturn(JAXBElement<TransactionResponse> value) {
+        this._return = ((JAXBElement<TransactionResponse> ) value);
     }
 
 }

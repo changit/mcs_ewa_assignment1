@@ -5,6 +5,7 @@ import localhost._8080.bank_system_core_auth.UserNotFoundException_Exception;
 import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.team5.bank.core.server.service.model.xsd.TransactionResponse;
 import org.team5.portal.FormatUtil;
 import org.team5.portal.data.*;
 import org.team5.portal.service.BankPortalService;
@@ -47,11 +48,11 @@ public class BankPortalServiceImpl implements BankPortalService {
         }
 
         if (authorized) {
-            String fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
+            TransactionResponse fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
 
             fundTransferResponse.setDescription("Money Transferred successfully");
             fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
-            fundTransferResponse.setTransactionId("1597538264");
+            fundTransferResponse.setTransactionId(String.valueOf(fundTransfer.getTransactionID().getValue()));
             fundTransferResponse.setSourceId(request.getRequestId());
         } else {
             fundTransferResponse.setResultCode(FundTransferCode.FAILED_0001);

@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlType;
+import org.team5.bank.core.server.service.model.xsd.TransactionResponse;
 
 
 /**
@@ -19,7 +20,7 @@ import javax.xml.bind.annotation.XmlType;
  *   &lt;complexContent>
  *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
  *       &lt;sequence>
- *         &lt;element name="return" type="{http://www.w3.org/2001/XMLSchema}string" minOccurs="0"/>
+ *         &lt;element name="return" type="{http://model.service.server.core.bank.team5.org/xsd}TransactionResponse" minOccurs="0"/>
  *       &lt;/sequence>
  *     &lt;/restriction>
  *   &lt;/complexContent>
@@ -36,17 +37,17 @@ import javax.xml.bind.annotation.XmlType;
 public class FundTransferResponse {
 
     @XmlElementRef(name = "return", namespace = "http://iso8583.org/payload", type = JAXBElement.class)
-    protected JAXBElement<String> _return;
+    protected JAXBElement<TransactionResponse> _return;
 
     /**
      * Gets the value of the return property.
      * 
      * @return
      *     possible object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}
      *     
      */
-    public JAXBElement<String> getReturn() {
+    public JAXBElement<TransactionResponse> getReturn() {
         return _return;
     }
 
@@ -55,11 +56,11 @@ public class FundTransferResponse {
      * 
      * @param value
      *     allowed object is
-     *     {@link JAXBElement }{@code <}{@link String }{@code >}
+     *     {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}
      *     
      */
-    public void setReturn(JAXBElement<String> value) {
-        this._return = ((JAXBElement<String> ) value);
+    public void setReturn(JAXBElement<TransactionResponse> value) {
+        this._return = ((JAXBElement<TransactionResponse> ) value);
     }
 
 }
