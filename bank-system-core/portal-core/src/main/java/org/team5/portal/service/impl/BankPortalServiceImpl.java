@@ -142,7 +142,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         transaction2.setEffectiveDate(FormatUtil.formatDate(new Date()));
         transaction2.setTransactionDate(FormatUtil.formatDate(new Date()));
         transaction2.setDescription("External Transfer to 95148731");
-        transaction1.setType("CR");
+        transaction2.setType("CR");
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
         transactionList.add(transaction1);
