@@ -4,6 +4,9 @@ public class Account {
 
 	private String accountNo;
 	private String accountName;
+	private String accountType;
+	private String balance;
+	private String currency; 
 	private String userId;
 
 	public String getAccountNo() {
@@ -29,5 +32,30 @@ public class Account {
 	public String getAccountName() {
 		return accountName;
 	}
+
+	public String getAccountType() {
+		return accountType;
+	}
+
+	public void setAccountType(String accountType) {
+		this.accountType = accountType;
+	}
+
+	public String getBalance() {
+		return balance;
+	}
+
+	public void setBalance(String balance) {
+		this.balance = balance;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+	
 
 }

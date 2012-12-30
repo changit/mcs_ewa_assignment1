@@ -38,19 +38,19 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link LoginResponse }
+     * 
+     */
+    public LoginResponse createLoginResponse() {
+        return new LoginResponse();
+    }
+
+    /**
      * Create an instance of {@link VerifyToken }
      * 
      */
     public VerifyToken createVerifyToken() {
         return new VerifyToken();
-    }
-
-    /**
-     * Create an instance of {@link AuthenticateResponse }
-     * 
-     */
-    public AuthenticateResponse createAuthenticateResponse() {
-        return new AuthenticateResponse();
     }
 
     /**
@@ -70,19 +70,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link LoginResponse }
-     * 
-     */
-    public LoginResponse createLoginResponse() {
-        return new LoginResponse();
-    }
-
-    /**
      * Create an instance of {@link Authenticate }
      * 
      */
     public Authenticate createAuthenticate() {
         return new Authenticate();
+    }
+
+    /**
+     * Create an instance of {@link AuthenticateResponse }
+     * 
+     */
+    public AuthenticateResponse createAuthenticateResponse() {
+        return new AuthenticateResponse();
     }
 
     /**

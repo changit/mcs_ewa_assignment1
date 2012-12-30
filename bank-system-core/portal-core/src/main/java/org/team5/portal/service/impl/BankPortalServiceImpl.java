@@ -90,7 +90,10 @@ public class BankPortalServiceImpl implements BankPortalService {
     	Account account= new Account();
     	account.setUserId(userId);
     	account.setAccountNo("1212121212121");
-    	account.setAccountName("Saving account");
+    	account.setAccountName("KWS CHandana");
+    	account.setAccountType("Saving Account");
+    	account.setBalance("10000.00");
+    	account.setCurrency("LKR");
     	accountList.add(account);
     	return accountList;
     }
