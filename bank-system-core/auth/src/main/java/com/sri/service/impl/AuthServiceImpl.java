@@ -5,6 +5,7 @@ import com.sri.service.AuthService;
 import com.sri.service.LoginTokenManager;
 import com.sri.service.UserManager;
 import com.sri.service.UserService;
+import com.sri.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -103,5 +104,10 @@ public class AuthServiceImpl implements AuthService {
         }
 
         return response;
+    }
+
+    @Override
+    public boolean verifyToken(Long userId, String token) throws UserNotFoundException {
+        return loginTokenManager.verifyToken(userId, token);
     }
 }

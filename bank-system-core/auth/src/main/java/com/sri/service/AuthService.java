@@ -1,6 +1,7 @@
 package com.sri.service;
 
 import com.sri.model.LoginResponse;
+import com.sri.service.exception.UserNotFoundException;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -13,4 +14,6 @@ import javax.jws.WebService;
 public interface AuthService {
 
     LoginResponse authenticate(@WebParam(name = "userName") String username, @WebParam(name = "hash") String passwordHash);
+
+    boolean verifyToken(@WebParam(name = "userId") Long userId, @WebParam(name = "token") String token) throws UserNotFoundException;
 }
