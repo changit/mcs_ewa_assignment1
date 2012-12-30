@@ -1,10 +1,7 @@
 package org.team5.portal.service;
 
 import org.iso8583.payload.FundTransfer;
-import org.team5.portal.data.Account;
-import org.team5.portal.data.FundTransferRequest;
-import org.team5.portal.data.FundTransferResponse;
-import org.team5.portal.data.Transaction;
+import org.team5.portal.data.*;
 
 import javax.jws.WebParam;
 import javax.jws.WebService;
@@ -26,5 +23,9 @@ public interface BankPortalService {
     List<Transaction> getAccountHistory(@WebParam(name = "accountNumber") String accountNo);
     
     List<Account> getAccountList(@WebParam(name = "userId") String userId);
+
+    List<CreditCardAccount> getCreditCardList(@WebParam(name = "userId") String userId);
+
+    List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId);
 
 }

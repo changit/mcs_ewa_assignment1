@@ -1,8 +1,12 @@
 package org.team5.portal.data;
 
-public class Account {
+import java.io.Serializable;
 
-	private String accountNo;
+public class Account implements Serializable {
+
+    private static final long serialVersionUID = 6975536580364925969L;
+
+    private String accountNo;
 	private String accountName;
 	private String accountType;
 	private String balance;

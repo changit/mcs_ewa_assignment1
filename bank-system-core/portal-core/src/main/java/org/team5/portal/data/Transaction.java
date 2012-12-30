@@ -12,8 +12,8 @@ public class Transaction {
     private String transactionDate;
     private String effectiveDate;
     private String description;
-    private String withdrawal;
-    private String deposit;
+    private String amount;
+    private String type;
 
     public String getTransactionDate() {
         return transactionDate;
@@ -39,19 +39,19 @@ public class Transaction {
         this.description = description;
     }
 
-    public String getWithdrawal() {
-        return withdrawal;
+    public String getAmount() {
+        return amount;
     }
 
-    public void setWithdrawal(String withdrawal) {
-        this.withdrawal = withdrawal;
+    public void setAmount(String amount) {
+        this.amount = amount;
     }
 
-    public String getDeposit() {
-        return deposit;
+    public String getType() {
+        return type;
     }
 
-    public void setDeposit(String deposit) {
-        this.deposit = deposit;
+    public void setType(String type) {
+        this.type = type;
     }
 }
