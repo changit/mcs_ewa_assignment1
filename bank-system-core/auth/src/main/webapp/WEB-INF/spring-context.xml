@@ -14,6 +14,12 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
             publish="true"
             />
 
+    <jaxws:endpoint
+            implementor="com.sri.service.impl.UserServiceImpl"
+            address="/UserSer"
+            publish="true"
+            />
+
 
     <bean id="propertyConfigurer"
           class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">

@@ -17,6 +17,7 @@ import javax.persistence.Query;
 public class UserDaoImpl implements UserDao {
 
     private static final String selectUserByUserNameQuery =  "select u from User as u where u.userName = :userName";
+    private static final String selectUserByIdNameQuery =  "select u from User as u where u.id = :id";
 
     @PersistenceContext
     EntityManager em;
@@ -44,5 +45,10 @@ public class UserDaoImpl implements UserDao {
         em.merge(user);
     }
 
-
+    @Override
+    public User getUserById(Long userId) {
+        Query query = em.createQuery(selectUserByIdNameQuery);
+        query.setParameter("id", userId);
+        return (User) query.getSingleResult();
+    }
 }
