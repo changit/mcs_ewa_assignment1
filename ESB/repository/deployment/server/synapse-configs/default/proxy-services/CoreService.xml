@@ -42,7 +42,7 @@
                         xmlns:ns="http://iso8583.org/payload"
                         xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
                         xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
-                        xmlns:ax21="http://model.service.server.core.bank.team5.org/xsd"
+                        xmlns:ax2496="http://model.service.server.core.bank.team5.org/xsd"
                         xmlns:xs="http://www.w3.org/2001/XMLSchema"
                         xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
                         xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
@@ -53,6 +53,16 @@
             <xs:schema attributeFormDefault="qualified"
                        elementFormDefault="qualified"
                        targetNamespace="http://model.service.server.core.bank.team5.org/xsd">
+               <xs:complexType name="TransactionResponse">
+                  <xs:sequence>
+                     <xs:element minOccurs="0" name="error" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0"
+                                 name="transactionID"
+                                 nillable="true"
+                                 type="xs:double"/>
+                  </xs:sequence>
+               </xs:complexType>
                <xs:complexType name="Transaction">
                   <xs:sequence>
                      <xs:element minOccurs="0" name="amount" type="xs:double"/>
@@ -66,8 +76,20 @@
                      <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
                   </xs:sequence>
                </xs:complexType>
+               <xs:complexType name="Account">
+                  <xs:sequence>
+                     <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0" name="balance" type="xs:double"/>
+                     <xs:element minOccurs="0"
+                                 name="description"
+                                 nillable="true"
+                                 type="xs:string"/>
+                     <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                     <xs:element minOccurs="0" name="userId" type="xs:long"/>
+                  </xs:sequence>
+               </xs:complexType>
             </xs:schema>
-            <xs:schema xmlns:ax22="http://model.service.server.core.bank.team5.org/xsd"
+            <xs:schema xmlns:ax2497="http://model.service.server.core.bank.team5.org/xsd"
                        attributeFormDefault="qualified"
                        elementFormDefault="qualified"
                        targetNamespace="http://iso8583.org/payload">
@@ -83,7 +105,10 @@
                <xs:element name="withdrawResponse">
                   <xs:complexType>
                      <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
                      </xs:sequence>
                   </xs:complexType>
                </xs:element>
@@ -101,7 +126,7 @@
                                     minOccurs="0"
                                     name="return"
                                     nillable="true"
-                                    type="ax21:Transaction"/>
+                                    type="ax2496:Transaction"/>
                      </xs:sequence>
                   </xs:complexType>
                </xs:element>
@@ -119,6 +144,23 @@
                      </xs:sequence>
                   </xs:complexType>
                </xs:element>
+               <xs:element name="getAccount">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="userId" type="xs:long"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getAccountResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:Account"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
                <xs:element name="fundTransfer">
                   <xs:complexType>
                      <xs:sequence>
@@ -131,7 +173,10 @@
                <xs:element name="fundTransferResponse">
                   <xs:complexType>
                      <xs:sequence>
-                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
                      </xs:sequence>
                   </xs:complexType>
                </xs:element>
@@ -146,7 +191,10 @@
                <xs:element name="depositResponse">
                   <xs:complexType>
                      <xs:sequence>
-                        <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
                      </xs:sequence>
                   </xs:complexType>
                </xs:element>
@@ -182,6 +230,12 @@
          <wsdl:message name="fundTransferResponse">
             <wsdl:part name="parameters" element="ns:fundTransferResponse"/>
          </wsdl:message>
+         <wsdl:message name="getAccountRequest">
+            <wsdl:part name="parameters" element="ns:getAccount"/>
+         </wsdl:message>
+         <wsdl:message name="getAccountResponse">
+            <wsdl:part name="parameters" element="ns:getAccountResponse"/>
+         </wsdl:message>
          <wsdl:portType name="CoreServicePortType">
             <wsdl:operation name="withdraw">
                <wsdl:input message="ns:withdrawRequest" wsaw:Action="urn:withdraw"/>
@@ -205,6 +259,10 @@
                <wsdl:input message="ns:fundTransferRequest" wsaw:Action="urn:fundTransfer"/>
                <wsdl:output message="ns:fundTransferResponse"
                             wsaw:Action="urn:fundTransferResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <wsdl:input message="ns:getAccountRequest" wsaw:Action="urn:getAccount"/>
+               <wsdl:output message="ns:getAccountResponse" wsaw:Action="urn:getAccountResponse"/>
             </wsdl:operation>
          </wsdl:portType>
          <wsdl:binding name="CoreServiceSoap11Binding" type="ns:CoreServicePortType">
@@ -247,6 +305,15 @@
             </wsdl:operation>
             <wsdl:operation name="fundTransfer">
                <soap:operation soapAction="urn:fundTransfer" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <soap:operation soapAction="urn:getAccount" style="document"/>
                <wsdl:input>
                   <soap:body use="literal"/>
                </wsdl:input>
@@ -302,6 +369,15 @@
                   <soap12:body use="literal"/>
                </wsdl:output>
             </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <soap12:operation soapAction="urn:getAccount" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
          </wsdl:binding>
          <wsdl:binding name="CoreServiceHttpBinding" type="ns:CoreServicePortType">
             <http:binding verb="POST"/>
@@ -350,15 +426,24 @@
                   <mime:content type="text/xml" part="parameters"/>
                </wsdl:output>
             </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <http:operation location="getAccount"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
          </wsdl:binding>
          <wsdl:service name="CoreService">
             <wsdl:port name="CoreServiceHttpsSoap11Endpoint"
                        binding="ns:CoreServiceSoap11Binding">
-               <soap:address location="https://192.168.2.1:9445/services/CoreService.CoreServiceHttpsSoap11Endpoint/"/>
+               <soap:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsSoap11Endpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceHttpSoap11Endpoint"
                        binding="ns:CoreServiceSoap11Binding">
-               <soap:address location="http://192.168.2.1:9765/services/CoreService.CoreServiceHttpSoap11Endpoint/"/>
+               <soap:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpSoap11Endpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceLocalSoap11Endpoint"
                        binding="ns:CoreServiceSoap11Binding">
@@ -366,21 +451,21 @@
             </wsdl:port>
             <wsdl:port name="CoreServiceHttpsSoap12Endpoint"
                        binding="ns:CoreServiceSoap12Binding">
-               <soap12:address location="https://192.168.2.1:9445/services/CoreService.CoreServiceHttpsSoap12Endpoint/"/>
+               <soap12:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsSoap12Endpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceHttpSoap12Endpoint"
                        binding="ns:CoreServiceSoap12Binding">
-               <soap12:address location="http://192.168.2.1:9765/services/CoreService.CoreServiceHttpSoap12Endpoint/"/>
+               <soap12:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpSoap12Endpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceLocalSoap12Endpoint"
                        binding="ns:CoreServiceSoap12Binding">
                <soap12:address location="local:///services/CoreService.CoreServiceLocalSoap12Endpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceHttpsEndpoint" binding="ns:CoreServiceHttpBinding">
-               <http:address location="https://192.168.2.1:9445/services/CoreService.CoreServiceHttpsEndpoint/"/>
+               <http:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsEndpoint/"/>
             </wsdl:port>
             <wsdl:port name="CoreServiceHttpEndpoint" binding="ns:CoreServiceHttpBinding">
-               <http:address location="http://192.168.2.1:9765/services/CoreService.CoreServiceHttpEndpoint/"/>
+               <http:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpEndpoint/"/>
             </wsdl:port>
          </wsdl:service>
       </wsdl:definitions>
