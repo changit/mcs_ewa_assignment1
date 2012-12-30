@@ -1,6 +1,7 @@
 package com.sri;
 
 import com.sri.model.User;
+import com.sri.service.UserManager;
 import com.sri.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,15 +19,15 @@ public class Test {
     private static Logger logger = LoggerFactory.getLogger(Test.class);
 
     @Autowired
-    UserService userService;
+    UserManager userManager;
 
     public void init() {
         User user = new User();
 
         user.setUserName("XXX");
-        userService.createUser(user);
+        userManager.createUser(user);
 
-        User foundUser = userService.findUserByUserName("XXX");
+        User foundUser = userManager.findUserByUserName("XXX");
         logger.info("Found Entity [{}] ", foundUser.getUserName());
     }
 }

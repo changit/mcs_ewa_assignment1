@@ -1,6 +1,10 @@
 package com.sri.service;
 
-import com.sri.model.User;
+import com.sri.model.UserDTO;
+
+import javax.jws.WebParam;
+import javax.jws.WebService;
+import javax.persistence.NoResultException;
 
 /**
  * Created with IntelliJ IDEA.
@@ -9,13 +13,9 @@ import com.sri.model.User;
  * Time: 10:55 PM
  * To change this template use File | Settings | File Templates.
  */
+
+@WebService(targetNamespace = "http://localhost:8080/bank-system-core-user")
 public interface UserService {
 
-    void createUser(User user);
-
-    User findUserByUserName(String userName);
-
-    void deleteUser(User user);
-
-    void updateUser(User user);
+    UserDTO getUserById(@WebParam(name = "userId")Long userId) throws NoResultException;
 }

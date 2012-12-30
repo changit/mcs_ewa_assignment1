@@ -29,6 +29,8 @@ public class User implements Serializable{
     private String userName;
     @Column(length = 50)
     private String password;
+    @Column(length = 50)
+    private String transactionPassword;
     private boolean accountLock;
     private int invalidPasswordCount;
 
@@ -62,6 +64,14 @@ public class User implements Serializable{
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getTransactionPassword() {
+        return transactionPassword;
+    }
+
+    public void setTransactionPassword(String transactionPassword) {
+        this.transactionPassword = transactionPassword;
     }
 
     public Set<Role> getRoles() {

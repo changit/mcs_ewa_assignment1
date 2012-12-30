@@ -3,6 +3,7 @@ package com.sri.service.impl;
 import com.sri.model.*;
 import com.sri.service.AuthService;
 import com.sri.service.LoginTokenManager;
+import com.sri.service.UserManager;
 import com.sri.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +22,7 @@ import java.util.Random;
 public class AuthServiceImpl implements AuthService {
 
     @Autowired
-    private UserService userService;
+    private UserManager userManager;
 
     @Autowired
     private LoginTokenManager loginTokenManager;
@@ -34,10 +35,10 @@ public class AuthServiceImpl implements AuthService {
 
         User user = null;
         try {
-            user = userService.findUserByUserName(username);
+            user = userManager.findUserByUserName(username);
         } catch (NoResultException ex) {
             response.setResult(LoginCode.FAILED.name());
-            response.setErrorMsg(ex.getMessage());
+            response.setErrorMsg("Username or password invalid.");
         }
 
         if (user != null) {
@@ -52,7 +53,7 @@ public class AuthServiceImpl implements AuthService {
                 if (user.getPassword().equals(passwordHash)) {
 
                     Random ran = new Random(new Date().getTime());
-                    Long token = ran.nextLong();
+                    Long token = Math.abs(ran.nextLong());
                     response.setUserId(String.valueOf(user.getId()));
                     response.setLoginToken(String.valueOf(token));
                     response.setResult(LoginCode.SUCCESS.name());
@@ -79,7 +80,7 @@ public class AuthServiceImpl implements AuthService {
 
                     if (user.getInvalidPasswordCount() != 0) {
                         user.setInvalidPasswordCount(0);
-                        userService.updateUser(user);
+                        userManager.updateUser(user);
                     }
                 } else {
                     user.setInvalidPasswordCount(user.getInvalidPasswordCount() + 1);
@@ -88,13 +89,13 @@ public class AuthServiceImpl implements AuthService {
                         user.setAccountLock(true);
                     }
 
-                    userService.updateUser(user);
+                    userManager.updateUser(user);
 
                     response.setResult(LoginCode.FAILED.name());
                     if (user.getInvalidPasswordCount() == 3) {
                         response.setErrorMsg("Invalid Password. Your account is locked now. \n Please contact bank.");
                     } else {
-                        response.setErrorMsg("Invalid Password. You are left with " + (3 - user.getInvalidPasswordCount()) + " more attempts");
+                        response.setErrorMsg("Invalid Password. \nYou are left with " + (3 - user.getInvalidPasswordCount()) + " more attempts");
 
                     }
                 }

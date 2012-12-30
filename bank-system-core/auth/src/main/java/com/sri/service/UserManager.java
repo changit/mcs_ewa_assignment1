@@ -1,23 +1,21 @@
-package com.sri.dao;
+package com.sri.service;
 
 import com.sri.model.User;
 
 /**
  * Created with IntelliJ IDEA.
- * User: chandana
- * Date: 12/12/12
- * Time: 10:01 PM
+ * User: gihan
+ * Date: 12/30/12
+ * Time: 9:32 AM
  * To change this template use File | Settings | File Templates.
  */
-public interface UserDao {
+public interface UserManager {
 
     void createUser(User user);
 
     User findUserByUserName(String userName);
 
-    void removeUser(User user);
+    void deleteUser(User user);
 
     void updateUser(User user);
-
-    User getUserById(Long userId);
 }
