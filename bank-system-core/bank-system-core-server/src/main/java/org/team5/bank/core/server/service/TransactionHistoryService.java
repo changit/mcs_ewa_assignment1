@@ -33,7 +33,7 @@ public class TransactionHistoryService implements WebService {
 	        	StringBuffer amountList = new StringBuffer("[");
 	        	StringBuffer timeStampList = new StringBuffer("[");
 	        	for (org.team5.bank.core.server.service.model.Transaction transaction : transactions) {
-	        		idList.append(transaction.getAmount());
+	        		idList.append(transaction.getId());
 	        		idList.append("::");
 	        		accountList.append(transaction.getFromAccount());
 	        		accountList.append("::");
@@ -59,6 +59,7 @@ public class TransactionHistoryService implements WebService {
 		} else{
 			throw new ServiceException("arguments cannot be null or empty");
 		}
+		data.put("sys:map", "true");
 		return data;
 	}
 

@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.team5.bank.core.server.service.model.WSResult;
+import org.team5.bank.core.server.service.model.WSResult.ResultType;
 import org.team5.bank.core.server.service.model.WSResult.Status;
 import org.team5.bank.core.server.service.model.WebService;
 
@@ -24,18 +25,28 @@ public class ServiceInvoker {
 		WSResult result = null;
 		
 		WebService webService = serviceClasses.get(action);
+		boolean map = false;
 		if(webService!=null){
 			try {
 				StringBuffer buffer = new StringBuffer ();
 				Map<String, String> values = webService.invokeService(param);
 				for (Map.Entry<String, String> entry :values.entrySet()){
-					buffer.append(entry.getKey());
-					buffer.append("=");
-					buffer.append(entry.getValue());
-					buffer.append(",");
-					result = new WSResult();
-					result.setStatus(Status.SUCCESS);
-					result.setValues(buffer.toString());
+					if("sys:map".equals(entry.getKey()) && "true".equals(entry.getValue())){
+						map = true;
+					} else{
+						result = new WSResult();
+						result.setStatus(Status.SUCCESS);
+						buffer.append(entry.getKey());
+						buffer.append("=");
+						buffer.append(entry.getValue());
+						buffer.append(",");
+						result.setValues(buffer.toString());
+					}
+				}
+				if(result!=null){
+					if(map){
+						result.setResultType(ResultType.MAP);
+					}
 				}
 			} catch (ServiceException e) {
 				result = new WSResult();
