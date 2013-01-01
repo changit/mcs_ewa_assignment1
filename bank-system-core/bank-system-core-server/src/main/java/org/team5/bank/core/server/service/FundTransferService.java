@@ -66,7 +66,7 @@ public class FundTransferService implements WebService {
 	        	}
 	 	       
 	        } else{
-	        	throw new ServiceException("Cannot find account with identifier '" + accountFrom + "' or '" + accountTo + "'" );
+	        	throw new ServiceException("Cannot find account with identifier '" + fromAccountId + "' or '" + toAccountId + "'" );
 	        }
 	       
 		} else{

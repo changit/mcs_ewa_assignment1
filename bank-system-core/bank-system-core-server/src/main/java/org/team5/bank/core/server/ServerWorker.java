@@ -14,6 +14,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.team5.bank.core.server.service.ServiceInvoker;
 import org.team5.bank.core.server.service.model.WSResult;
+import org.team5.bank.core.server.service.model.WSResult.ResultType;
 import org.team5.bank.core.server.service.model.WSResult.Status;
 
 public class ServerWorker implements Runnable {
@@ -110,10 +111,13 @@ public class ServerWorker implements Runnable {
 		if(result.getStatus()==Status.SUCCESS){
 			responseBuffer.append("sys:status=success");
 			responseBuffer.append(",");
+			if(result.getResultType()==ResultType.MAP){
+				responseBuffer.append("sys:resultType=map");
+				responseBuffer.append(",");
+			}
 			responseBuffer.append(result.getValues());
 		} else{
 			responseBuffer.append("sys:status=failed");
-			responseBuffer.append("status=failed");
 			responseBuffer.append(",");
 			responseBuffer.append("error=" + result.getErrorMsg() );
 			responseBuffer.append(",");
