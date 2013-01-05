@@ -39,4 +39,9 @@ public class LoginTokenManagerImpl implements LoginTokenManager {
 
         return result;
     }
+
+    @Override
+    public LoginToken getLastLoginTokenByUserId(final Long userId) {
+        return loginTokenDao.getLastLoginTokenByUserId(userId);
+    }
 }

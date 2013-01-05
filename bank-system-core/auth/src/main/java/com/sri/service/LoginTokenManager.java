@@ -12,4 +12,6 @@ public interface LoginTokenManager {
     void saveLoginToken(LoginToken loginToken);
 
     boolean verifyToken(Long userId, String token) throws UserNotFoundException;
+
+    LoginToken getLastLoginTokenByUserId(Long userId);
 }

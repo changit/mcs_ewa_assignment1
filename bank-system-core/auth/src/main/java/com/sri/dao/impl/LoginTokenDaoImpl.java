@@ -42,4 +42,15 @@ public class LoginTokenDaoImpl implements LoginTokenDao {
 
         return false;
     }
+
+    @Override
+    public LoginToken getLastLoginTokenByUserId(final Long userId) {
+        Query query = em.createQuery(GET_USER_LAST_TOKEN_BY_USER_ID);
+        query.setParameter("userId", userId);
+        query.setMaxResults(1);
+
+        return (LoginToken) query.getSingleResult();
+    }
+
+
 }

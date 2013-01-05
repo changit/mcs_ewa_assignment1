@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.jws.WebService;
 import javax.persistence.NoResultException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Random;
@@ -27,6 +28,8 @@ public class AuthServiceImpl implements AuthService {
 
     @Autowired
     private LoginTokenManager loginTokenManager;
+
+    private static SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     @Override
     @Transactional
@@ -69,6 +72,11 @@ public class AuthServiceImpl implements AuthService {
                         }
 
                         response.setRoles(roles);
+                    }
+
+                    LoginToken lastLoginToken = loginTokenManager.getLastLoginTokenByUserId(user.getId());
+                    if (lastLoginToken != null) {
+                       response.setLastLoginTime(dateFormat.format(lastLoginToken.getTokenCreatedTime()));
                     }
 
                     // save login token details

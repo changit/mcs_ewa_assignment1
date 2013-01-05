@@ -18,6 +18,7 @@ public class LoginResponse implements Serializable {
     private String[] roles;
     private String result;
     private String errorMsg;
+    private String lastLoginTime;
 
     public LoginResponse() {
     }
@@ -60,6 +61,14 @@ public class LoginResponse implements Serializable {
 
     public void setErrorMsg(String errorMsg) {
         this.errorMsg = errorMsg;
+    }
+
+    public String getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(String lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 
     @Override
