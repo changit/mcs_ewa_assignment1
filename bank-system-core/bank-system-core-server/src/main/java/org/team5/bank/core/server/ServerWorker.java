@@ -54,7 +54,7 @@ public class ServerWorker implements Runnable {
 			log.info("***** ISO8583 Request : " + requestBuffer.toString());
 			String response = processRequest(requestBuffer.toString());
 			log.info("***** ISO8583 Response : " + response);
-			out.println(response);
+			out.print(response);
 			
 		} catch (IOException e) {
 			log.error("An error has occurred",e);
