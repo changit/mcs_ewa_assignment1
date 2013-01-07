@@ -5,9 +5,11 @@ import localhost._8080.bank_system_core_auth.UserNotFoundException_Exception;
 import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.team5.bank.core.server.service.model.xsd.TransactionResponse;
+import org.team5.bank.core.server.service.model.xsd.*;
 import org.team5.portal.FormatUtil;
 import org.team5.portal.data.*;
+import org.team5.portal.data.Account;
+import org.team5.portal.data.Transaction;
 import org.team5.portal.service.BankPortalService;
 
 import javax.jws.WebParam;
@@ -48,7 +50,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         }
 
         if (authorized) {
-            TransactionResponse fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getAmount(), Double.parseDouble(request.getAmount()));
+            TransactionResponse fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getToAccount(), Double.parseDouble(request.getAmount()));
 
             fundTransferResponse.setDescription("Money Transferred successfully");
             fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
@@ -63,26 +65,47 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
     public List<Transaction> getAccountHistory(String accountNo) {
-        Transaction transaction1 = new Transaction();
-        transaction1.setAmount("1000");
-        transaction1.setEffectiveDate(FormatUtil.formatDate(new Date()));
-        transaction1.setTransactionDate(FormatUtil.formatDate(new Date()));
-        transaction1.setDescription("Received 1000");
-        transaction1.setType("CR");
-
-        Transaction transaction2 = new Transaction();
-        transaction2.setAmount("2000");
-        transaction2.setEffectiveDate(FormatUtil.formatDate(new Date()));
-        transaction2.setTransactionDate(FormatUtil.formatDate(new Date()));
-        transaction2.setDescription("External Transfer to 95148731");
-        transaction2.setType("DR");
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
-        transactionList.add(transaction1);
-        transactionList.add(transaction2);
+        List<org.team5.bank.core.server.service.model.xsd.Transaction> transactionHistory = legacyService.getTransactionHistory(accountNo);
+        for (org.team5.bank.core.server.service.model.xsd.Transaction transaction : transactionHistory) {
+            transactionList.add(transform(transaction));
+        }
+//        Transaction transaction1 = new Transaction();
+//        transaction1.setAmount("1000");
+//        transaction1.setEffectiveDate(FormatUtil.formatDate(new Date()));
+//        transaction1.setTransactionDate(FormatUtil.formatDate(new Date()));
+//        transaction1.setDescription("Received 1000");
+//        transaction1.setType("CR");
+//
+//        Transaction transaction2 = new Transaction();
+//        transaction2.setAmount("2000");
+//        transaction2.setEffectiveDate(FormatUtil.formatDate(new Date()));
+//        transaction2.setTransactionDate(FormatUtil.formatDate(new Date()));
+//        transaction2.setDescription("External Transfer to 95148731");
+//        transaction2.setType("DR");
+
+
+//        transactionList.add(transaction1);
+//        transactionList.add(transaction2);
         return transactionList;
     }
-    
+
+    private Transaction transform(org.team5.bank.core.server.service.model.xsd.Transaction transaction) {
+        Transaction trx = new Transaction();
+        trx.setAmount(String.valueOf(transaction.getAmount()));
+        trx.setEffectiveDate(transaction.getTimeStamp().getValue().toString());
+        trx.setTransactionDate(transaction.getTimeStamp().getValue().toString());
+        if(transaction.getType().getValue().equals("deposit")) {
+            trx.setType("CR");
+        } else {
+            trx.setType("DR");
+        }
+        trx.setDescription("SUCCESS");
+        return trx;
+    }
+
+
     @Override
 	public  List<Account> getAccountList(String userId){
     	List<Account> accountList = new ArrayList<Account>();
