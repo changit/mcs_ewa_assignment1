@@ -33,6 +33,7 @@ public class User implements Serializable{
     private String transactionPassword;
     private boolean accountLock;
     private int invalidPasswordCount;
+    private String corporateId;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -96,6 +97,14 @@ public class User implements Serializable{
 
     public void setInvalidPasswordCount(int invalidPasswordCount) {
         this.invalidPasswordCount = invalidPasswordCount;
+    }
+
+    public String getCorporateId() {
+        return corporateId;
+    }
+
+    public void setCorporateId(String corporateId) {
+        this.corporateId = corporateId;
     }
 
     @Override

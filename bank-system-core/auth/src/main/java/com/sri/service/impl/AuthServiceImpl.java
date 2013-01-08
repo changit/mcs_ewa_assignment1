@@ -4,7 +4,6 @@ import com.sri.model.*;
 import com.sri.service.AuthService;
 import com.sri.service.LoginTokenManager;
 import com.sri.service.UserManager;
-import com.sri.service.UserService;
 import com.sri.service.exception.UserNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,7 +32,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     @Transactional
-    public LoginResponse authenticate(String username, String passwordHash) {
+    public LoginResponse authenticate(final String username, final String passwordHash, final String corporateId) {
 
         LoginResponse response = new LoginResponse();
 
@@ -52,45 +51,54 @@ public class AuthServiceImpl implements AuthService {
                 response.setErrorMsg("User account is locked. \n" +
                         "Please contact bank.");
 
+            } else if ((user.getCorporateId() != null) && (corporateId == null)) {
+                response.setResult(LoginCode.FAILED.name());
+                response.setErrorMsg("Please enter Corporate ID.");
             } else {
 
                 if (user.getPassword().equals(passwordHash)) {
 
-                    Random ran = new Random(new Date().getTime());
-                    Long token = Math.abs(ran.nextLong());
-                    response.setUserId(String.valueOf(user.getId()));
-                    response.setLoginToken(String.valueOf(token));
-                    response.setResult(LoginCode.SUCCESS.name());
+                    if ((corporateId != null) && (!corporateId.equalsIgnoreCase(user.getCorporateId()))) {
+                        response.setResult(LoginCode.FAILED.name());
+                        response.setErrorMsg("Invalid Corporate ID.");
+                    } else {
+                        Random ran = new Random(new Date().getTime());
+                        Long token = Math.abs(ran.nextLong());
+                        response.setUserId(String.valueOf(user.getId()));
+                        response.setLoginToken(String.valueOf(token));
+                        response.setResult(LoginCode.SUCCESS.name());
 
-                    if (user.getRoles() != null) {
-                        String[] roles = new String[user.getRoles().size()];
-                        Iterator<Role> it = user.getRoles().iterator();
-                        int i = 0;
-                        while (it.hasNext()) {
-                            Role role = it.next();
-                            roles[i++] = role.getName();
+                        if (user.getRoles() != null) {
+                            String[] roles = new String[user.getRoles().size()];
+                            Iterator<Role> it = user.getRoles().iterator();
+                            int i = 0;
+                            while (it.hasNext()) {
+                                Role role = it.next();
+                                roles[i++] = role.getName();
+                            }
+
+                            response.setRoles(roles);
                         }
 
-                        response.setRoles(roles);
+                        LoginToken lastLoginToken = loginTokenManager.getLastLoginTokenByUserId(user.getId());
+                        if (lastLoginToken != null) {
+                            response.setLastLoginTime(dateFormat.format(lastLoginToken.getTokenCreatedTime()));
+                        }
+
+                        // save login token details
+                        LoginToken loginToken = new LoginToken();
+                        loginToken.setUserId(user.getId());
+                        loginToken.setLoginToken(String.valueOf(token));
+                        loginToken.setTokenCreatedTime(new Date());
+
+                        loginTokenManager.saveLoginToken(loginToken);
+
+                        if (user.getInvalidPasswordCount() != 0) {
+                            user.setInvalidPasswordCount(0);
+                            userManager.updateUser(user);
+                        }
                     }
 
-                    LoginToken lastLoginToken = loginTokenManager.getLastLoginTokenByUserId(user.getId());
-                    if (lastLoginToken != null) {
-                       response.setLastLoginTime(dateFormat.format(lastLoginToken.getTokenCreatedTime()));
-                    }
-
-                    // save login token details
-                    LoginToken loginToken = new LoginToken();
-                    loginToken.setUserId(user.getId());
-                    loginToken.setLoginToken(String.valueOf(token));
-                    loginToken.setTokenCreatedTime(new Date());
-
-                    loginTokenManager.saveLoginToken(loginToken);
-
-                    if (user.getInvalidPasswordCount() != 0) {
-                        user.setInvalidPasswordCount(0);
-                        userManager.updateUser(user);
-                    }
                 } else {
                     user.setInvalidPasswordCount(user.getInvalidPasswordCount() + 1);
 
