@@ -9,6 +9,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 import org.team5.bank.core.server.service.model.WebService;
+import java.text.SimpleDateFormat;
 
 public class TransactionHistoryService implements WebService {
 
@@ -43,7 +44,8 @@ public class TransactionHistoryService implements WebService {
 	        		typeList.append("::");
 	        		amountList.append(transaction.getAmount());
 	        		amountList.append("::");
-	        		timeStampList.append(transaction.getTimeStamp());
+				SimpleDateFormat timeStampF = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZZ");
+	        		timeStampList.append(timeStampF.format(transaction.getTimeStamp()));
 	        		timeStampList.append("::");
 				}
 	        	data.put("id", idList.toString().replaceAll("::$","]"));
