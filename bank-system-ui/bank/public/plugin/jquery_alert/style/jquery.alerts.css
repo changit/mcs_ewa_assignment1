@@ -1,0 +1,113 @@
+#popup_background{
+	position:fixed;
+	top:0;
+	left:0;
+	background:#FFF;
+	opacity:0;
+	filter: alpha(opacity = 0);
+	z-index:2500;
+}
+#popup_container {
+	width:420px;
+	height:200px;
+	min-width:420px;
+	max-width:420px;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FFFFFF', endColorstr='#e6e6e6') ;
+	background: -webkit-gradient(linear, left top, left bottom, from(#FFFFFF), to(#e6e6e6)) !important;
+	background: -moz-linear-gradient(top, #FFFFFF, #e6e6e6) !important; 
+	border:solid 1px #666;
+	font-family: Arial, sans-serif;
+	font-size:13px;
+	color:#000;
+	-moz-border-radius:5px;
+	-webkit-border-radius:5px;
+	border-radius:5px;
+	box-shadow: 0px 3px 4px #000;
+	-moz-box-shadow: 0px 3px 4px #000;
+	-webkit-box-shadow: 0px 3px 4px #000;
+	/* For IE 8 */
+	-ms-filter: "progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#000000');
+}
+
+#popup_title {
+	color: #5f6062;
+    cursor: default;
+    font-family: arial;
+	text-shadow: 1px 1px 1px #FFFFFF;
+    font-size: 25px;
+    font-weight: normal;
+    line-height: 1.75em;
+    margin: 22px 20px 0 35px;
+    padding: 0;
+    position: absolute;
+    text-align: left;
+    width: auto;
+}
+
+#popup_content {
+	position:absolute;
+	width:350px;
+	height:105px;
+	background: 300px 15px no-repeat url(../image/jquery_alert/temp.gif);
+	padding:95px 0 0 0;
+	margin: 0px 35px;
+} 
+
+#popup_content.alert {
+	background-image: url(../image/jquery_alert/info.png);
+}
+
+#popup_content.confirm {
+	background-image: url(../image/jquery_alert/important.png);
+}
+
+#popup_content.prompt {
+	background-image: url(../image/jquery_alert/help.png);
+}
+
+#popup_message {
+	color:#000;
+	font-size:14px;
+	font-weight:normal;
+	text-align:justify;
+	line-height:17px;
+}
+
+#popup_panel {
+	bottom: 30px;
+    margin: 0 auto;
+    position: absolute;
+    text-align: center;
+    width: 390px;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+
+#popup_container INPUT[type='button'] {
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#9e9fa3', endColorstr='#c0c2c7') !important;
+	background: -webkit-gradient(linear, left top, left bottom, from(#9e9fa3), to(#c0c2c7)) !important;
+	background: -moz-linear-gradient(top, #9e9fa3, #c0c2c7) !important;
+    border: 1px solid #8a8b8d;
+    border-radius: 5px 5px 5px 5px;
+    color: #FFF;
+	text-shadow: 0px 1px 1px #000;
+	box-shadow:inset 0 1px 1px #FFFFFF;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: normal;
+    height: 32px;
+    margin: 0 10px 0 0;
+    padding: 2px 4px;
+    min-width: 70px;
+}
+#popup_container INPUT[type='button']:hover {
+	background:#72a001;
+	color:#fff;
+}
+
+:focus {outline:none;}
+::-moz-focus-inner {border:0;}

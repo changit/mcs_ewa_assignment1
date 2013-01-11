@@ -1,0 +1,27 @@
+p#vtip { 
+	display: none; 
+	position: absolute; 
+	padding: 0 10px; 
+	left: 5px; 
+	font-size: 0.9em;
+	line-height:20px; 
+	background-color: white; 
+	border: 1px solid #a6c9e2; 
+	-moz-border-radius: 4px; 
+	-webkit-border-radius: 4px;
+	border-radius:4px;
+	z-index: 9999; 
+	color:#333; 
+	max-width:200px;
+}
+p#vtip #vtipArrow { 
+	position: absolute; 
+	top:19px;
+	left:2px;
+	width:21px;
+	height:11px;
+	padding:0;
+	margin:0;
+	background:url(vtip_arrow.png) 0 0 no-repeat;
+	border:none;
+}

@@ -1,0 +1,77 @@
+.file_upload {
+  position: relative;
+  overflow: hidden;
+  direction: ltr;
+  cursor: pointer;
+  text-align:center;
+  width:100px;
+cursor: pointer;
+font-size: 12px;
+font-weight: normal;]
+text-decoration: none;
+padding: 5px 20px;
+filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#386c9e', endColorstr='#0c4b87') !important;
+background: -webkit-gradient(linear, left top, left bottom, from(#386C9E), to(#0C4B87)) !important;
+background: -moz-linear-gradient(top, #386C9E, #0C4B87) !important;
+border: 1px solid white;
+border-radius: 5px 5px 5px 5px;
+box-shadow: 1px 1px 1px black;
+color: white;
+}
+
+.file_upload_small {
+  width: 200px;
+  height: 30px;
+  line-height: 30px;
+  font-size: auto;
+  background: #E31D22;
+  border: 1px solid #CCC;
+}
+
+.file_upload_large {
+  width: 100%;
+  height: 150px;
+  line-height: 150px;
+  font-size: 20px;
+  background: #E31D22;
+  border: 1px solid #CCC;
+}
+
+.file_upload_highlight {
+  background: #CCC;
+}
+
+.file_upload input {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin: 0;
+  border: 300px solid transparent;
+  opacity: 0;
+  -ms-filter: 'alpha(opacity=0)';
+  filter: alpha(opacity=0);
+  -o-transform: translate(-300px, -300px) scale(10);
+  -moz-transform: translate(-800px, 0) scale(10);
+  cursor: pointer;
+}
+
+.file_upload iframe, .file_upload button {
+  display: none;
+}
+
+.file_upload_preview img {
+  width: 80px;
+}
+
+.file_upload_progress .ui-progressbar-value {
+  background: url(pbar-ani.gif);
+}
+
+.file_upload_progress div {
+  width: 150px;
+  height: 15px;
+}
+
+.file_upload_cancel button {
+  cursor: pointer;
+}

@@ -1,0 +1,30 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Welcome to SriBank</title>
+<link href="<?php echo $this->baseUrl(); ?>/css/login.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+<div class="login_wrapper">
+  <div class="login_header"> Welcome to SriBank Online Banking </div>
+  <div class="login_content"> 
+  <a href="<?php echo $this->baseUrl('/index/personal'); ?>">
+    <div class="bank_box"> 
+    <div class="imgDiv"><img src="images/personal.png" /></div>
+      <div>Personal Banking</div>
+    </div>
+    </a>
+    <div class="middle_line"></div>
+    <a href="#">
+    <div class="bank_box"> 
+    <div class="imgDiv"><img src="images/corporate.png" /></div>
+      <div>Corporate Banking</div>
+    </div>
+    </a>
+  </div>
+</div>
+<div class="login_footer"> Powered by SriBank 2012 </div>
+</body>
+</html>

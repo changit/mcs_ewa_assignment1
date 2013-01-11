@@ -1,0 +1,33 @@
+2012-12-13T07:16:47+05:30 INFO (6): Error [Personal Banking] : exception 'Zend_View_Exception' with message 'script 'layout_default.phtml' not found in path (MODULE_PATH_DEFAULT/layouts/:/Applications/MAMP/htdocs/bank/application/modules/defaultmodule/views/scripts/)' in /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php:988
+Stack trace:
+#0 /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php(884): Zend_View_Abstract->_script('layout_default....')
+#1 /Applications/MAMP/htdocs/bank/library/Zend/Layout.php(796): Zend_View_Abstract->render('layout_default....')
+#2 /Applications/MAMP/htdocs/bank/library/Zend/Layout/Controller/Plugin/Layout.php(143): Zend_Layout->render()
+#3 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Plugin/Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#4 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#5 /Applications/MAMP/htdocs/bank/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /Applications/MAMP/htdocs/bank/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /Applications/MAMP/htdocs/bank/public/index.php(31): Zend_Application->run()
+#8 {main}
+2012-12-13T07:17:46+05:30 INFO (6): Error [Personal Banking] : exception 'Zend_View_Exception' with message 'script 'layout_default.phtml' not found in path (MODULE_PATH_DEFAULT/layouts/:/Applications/MAMP/htdocs/bank/application/modules/defaultmodule/views/scripts/)' in /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php:988
+Stack trace:
+#0 /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php(884): Zend_View_Abstract->_script('layout_default....')
+#1 /Applications/MAMP/htdocs/bank/library/Zend/Layout.php(796): Zend_View_Abstract->render('layout_default....')
+#2 /Applications/MAMP/htdocs/bank/library/Zend/Layout/Controller/Plugin/Layout.php(143): Zend_Layout->render()
+#3 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Plugin/Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#4 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#5 /Applications/MAMP/htdocs/bank/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /Applications/MAMP/htdocs/bank/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /Applications/MAMP/htdocs/bank/public/index.php(31): Zend_Application->run()
+#8 {main}
+2012-12-13T07:17:47+05:30 INFO (6): Error [Personal Banking] : exception 'Zend_View_Exception' with message 'script 'layout_default.phtml' not found in path (MODULE_PATH_DEFAULT/layouts/:/Applications/MAMP/htdocs/bank/application/modules/defaultmodule/views/scripts/)' in /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php:988
+Stack trace:
+#0 /Applications/MAMP/htdocs/bank/library/Zend/View/Abstract.php(884): Zend_View_Abstract->_script('layout_default....')
+#1 /Applications/MAMP/htdocs/bank/library/Zend/Layout.php(796): Zend_View_Abstract->render('layout_default....')
+#2 /Applications/MAMP/htdocs/bank/library/Zend/Layout/Controller/Plugin/Layout.php(143): Zend_Layout->render()
+#3 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Plugin/Broker.php(333): Zend_Layout_Controller_Plugin_Layout->postDispatch(Object(Zend_Controller_Request_Http))
+#4 /Applications/MAMP/htdocs/bank/library/Zend/Controller/Front.php(965): Zend_Controller_Plugin_Broker->postDispatch(Object(Zend_Controller_Request_Http))
+#5 /Applications/MAMP/htdocs/bank/library/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#6 /Applications/MAMP/htdocs/bank/library/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#7 /Applications/MAMP/htdocs/bank/public/index.php(31): Zend_Application->run()
+#8 {main}
