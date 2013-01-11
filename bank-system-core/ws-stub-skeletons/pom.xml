@@ -10,23 +10,12 @@
     </parent>
 
     <groupId>mcs-team5</groupId>
-    <artifactId>bank-system-core</artifactId>
+    <artifactId>ws-stub-skeletons</artifactId>
     <packaging>pom</packaging>
 
-    <dependencies>
-        <dependency>
-            <groupId>org.apache.cxf</groupId>
-            <artifactId>cxf-bundle</artifactId>
-            <version>2.6.2</version>
-        </dependency>
-    </dependencies>
-
     <modules>
-        <module>bank-system-core-server</module>
         <module>auth</module>
-        <module>ws-stub-skeletons</module>
-        <module>portal-core</module>
-        <module>utility-bill-service</module>
+        <module>legacy</module>
     </modules>
 
 </project>

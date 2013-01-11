@@ -34,9 +34,6 @@ public class BankPortalServiceImpl implements BankPortalService {
     @Autowired
     private AuthService authService;
 
-    @Autowired
-    private LegacyServiceMessageTransformer legacyTransformer;
-
     @Override
     public FundTransferResponse transfer(FundTransferRequest request) {
 
@@ -71,23 +68,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         for (org.team5.bank.core.server.service.model.xsd.Transaction transaction : transactionHistory) {
             transactionList.add(transform(transaction));
         }
-//        Transaction transaction1 = new Transaction();
-//        transaction1.setAmount("1000");
-//        transaction1.setEffectiveDate(FormatUtil.formatDate(new Date()));
-//        transaction1.setTransactionDate(FormatUtil.formatDate(new Date()));
-//        transaction1.setDescription("Received 1000");
-//        transaction1.setType("CR");
-//
-//        Transaction transaction2 = new Transaction();
-//        transaction2.setAmount("2000");
-//        transaction2.setEffectiveDate(FormatUtil.formatDate(new Date()));
-//        transaction2.setTransactionDate(FormatUtil.formatDate(new Date()));
-//        transaction2.setDescription("External Transfer to 95148731");
-//        transaction2.setType("DR");
 
-
-//        transactionList.add(transaction1);
-//        transactionList.add(transaction2);
         return transactionList;
     }
 
@@ -108,13 +89,14 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
 	public  List<Account> getAccountList(String userId){
-    	List<Account> accountList = new ArrayList<Account>();
+        org.team5.bank.core.server.service.model.xsd.Account account1 = legacyService.getAccount(Long.parseLong(userId));
+        List<Account> accountList = new ArrayList<Account>();
     	Account account= new Account();
-    	account.setUserId(userId);
-    	account.setAccountNo("1212121212121");
-    	account.setAccountName("KWS CHandana");
+    	account.setUserId(String.valueOf(account1.getUserId()));
+    	account.setAccountNo(account1.getAccountNo().getValue());
+    	account.setAccountName("");
     	account.setAccountType("Saving Account");
-    	account.setBalance("10000.00");
+    	account.setBalance(String.valueOf(account1.getBalance()));
     	account.setCurrency("LKR");
     	accountList.add(account);
     	return accountList;

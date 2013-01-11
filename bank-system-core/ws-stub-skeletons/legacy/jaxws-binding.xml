@@ -1,0 +1,16 @@
+<jaxws:bindings  node="wsdl:definitions/wsdl:types/xsd:schema"
+                 xmlns:jaxws="http://java.sun.com/xml/ns/jaxws"
+                 xmlns:jaxb="http://java.sun.com/xml/ns/jaxb"
+                 xmlns:xsd="http://www.w3.org/2001/XMLSchema" >
+
+
+    <jaxb:globalBindings>
+        <jaxb:javaType
+                name="java.util.Date"
+                xmlType="xs:date"
+                parseMethod="org.team5.ws.adapters.DateAdapter.marshal"
+                printMethod="org.team5.ws.adapters.DateAdapter.unmarshal"
+                />
+    </jaxb:globalBindings>
+
+</jaxws:bindings>

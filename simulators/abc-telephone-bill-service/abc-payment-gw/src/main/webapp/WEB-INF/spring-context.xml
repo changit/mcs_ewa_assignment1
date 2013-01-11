@@ -18,7 +18,7 @@ http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd">
                     <map>
                         <entry key="action" value="UsernameToken"/>
                         <entry key="passwordType" value="PasswordText"/>
-                        <entry key="passwordCallbackClass" value="abc.sec.ServerPasswordCallback"/>
+                        <entry key="passwordCallbackClass" value="abc.team5.ws.adapters.ServerPasswordCallback"/>
                     </map>
                 </constructor-arg>
             </bean>
