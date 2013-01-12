@@ -90,8 +90,8 @@ public class BankPortalServiceImpl implements BankPortalService {
     private Transaction transform(org.team5.bank.core.server.service.model.xsd.Transaction transaction) {
         Transaction trx = new Transaction();
         trx.setAmount(String.valueOf(transaction.getAmount()));
-        trx.setEffectiveDate(transaction.getTimeStamp().getValue().toString());
-        trx.setTransactionDate(transaction.getTimeStamp().getValue().toString());
+        trx.setEffectiveDate(FormatUtil.formatDate(transaction.getTimeStamp().getValue()));
+        trx.setTransactionDate(FormatUtil.formatDate(transaction.getTimeStamp().getValue()));
         if(transaction.getType().getValue().equals("deposit")) {
             trx.setType("CR");
             trx.setDescription("Money Transferred to [" + transaction.getToAccount().getValue() + "] Account");
