@@ -61,15 +61,28 @@ public class BankPortalServiceImpl implements BankPortalService {
     }
 
     @Override
-    public List<Transaction> getAccountHistory(String accountNo) {
+    public List<Transaction> getAccountHistory(String accountNo, Long userId, String loginToken) {
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
+
+        if(!verifyUser(userId, loginToken)) {
+            return transactionList;
+        }
+
         List<org.team5.bank.core.server.service.model.xsd.Transaction> transactionHistory = legacyService.getTransactionHistory(accountNo);
         for (org.team5.bank.core.server.service.model.xsd.Transaction transaction : transactionHistory) {
             transactionList.add(transform(transaction));
         }
 
         return transactionList;
+    }
+
+    private boolean verifyUser(Long userId, String loginToken){
+        try {
+            return authService.verifyToken(userId, loginToken);
+        } catch (UserNotFoundException_Exception e) {
+            return false;
+        }
     }
 
     private Transaction transform(org.team5.bank.core.server.service.model.xsd.Transaction transaction) {
@@ -88,8 +101,8 @@ public class BankPortalServiceImpl implements BankPortalService {
 
 
     @Override
-	public  List<Account> getAccountList(String userId){
-        org.team5.bank.core.server.service.model.xsd.Account account1 = legacyService.getAccount(Long.parseLong(userId));
+	public  List<Account> getAccountList(Long userId,String loginToken){
+        org.team5.bank.core.server.service.model.xsd.Account account1 = legacyService.getAccount(userId);
         List<Account> accountList = new ArrayList<Account>();
     	Account account= new Account();
     	account.setUserId(String.valueOf(account1.getUserId()));
@@ -103,9 +116,13 @@ public class BankPortalServiceImpl implements BankPortalService {
     }
 
     @Override
-    public List<CreditCardAccount> getCreditCardList(String userId) {
+    public List<CreditCardAccount> getCreditCardList(Long userId, String loginToken) {
 
         List<CreditCardAccount> cards = new ArrayList<CreditCardAccount>();
+
+        if(!verifyUser(userId, loginToken)) {
+            return cards;
+        }
 
         CreditCardAccount card1 = new CreditCardAccount();
         card1.setAccountNo("1245-1245-1245-0001");
@@ -116,7 +133,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         card1.setAccountType("CreditCard");
         card1.setCurrency("LKR");
         card1.setBalance("-15236.78");
-        card1.setUserId(userId);
+        card1.setUserId("" + userId);
         cards.add(card1);
 
         CreditCardAccount card2 = new CreditCardAccount();
@@ -128,14 +145,21 @@ public class BankPortalServiceImpl implements BankPortalService {
         card2.setAccountType("CreditCard");
         card2.setCurrency("LKR");
         card2.setBalance("-25014.50");
-        card2.setUserId(userId);
+        card2.setUserId("" + userId);
         cards.add(card2);
 
         return cards;
     }
 
     @Override
-    public List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId) {
+    public List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId, Long userId, String loginToken) {
+
+        List<Transaction> transactionList = new ArrayList<Transaction>();
+
+        if(!verifyUser(userId, loginToken)) {
+            return transactionList;
+        }
+
         Transaction transaction1 = new Transaction();
         transaction1.setAmount("1000");
         transaction1.setEffectiveDate(FormatUtil.formatDate(new Date()));
@@ -150,7 +174,6 @@ public class BankPortalServiceImpl implements BankPortalService {
         transaction2.setDescription("External Transfer to 95148731");
         transaction2.setType("CR");
 
-        List<Transaction> transactionList = new ArrayList<Transaction>();
         transactionList.add(transaction1);
         transactionList.add(transaction2);
 

@@ -20,12 +20,12 @@ public interface BankPortalService {
 
     FundTransferResponse transfer(@WebParam(name="request") FundTransferRequest request);
 
-    List<Transaction> getAccountHistory(@WebParam(name = "accountNumber") String accountNo);
+    List<Transaction> getAccountHistory(@WebParam(name = "accountNumber") String accountNo,@WebParam(name = "userId") Long userId,@WebParam(name = "loginToken") String loginToken);
     
-    List<Account> getAccountList(@WebParam(name = "userId") String userId);
+    List<Account> getAccountList(@WebParam(name = "userId") Long userId, @WebParam(name = "loginToken") String loginToken);
 
-    List<CreditCardAccount> getCreditCardList(@WebParam(name = "userId") String userId);
+    List<CreditCardAccount> getCreditCardList(@WebParam(name = "userId") Long userId, @WebParam(name = "loginToken") String loginToken);
 
-    List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId);
+    List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId, @WebParam(name = "userId") Long userId,@WebParam(name = "loginToken") String loginToken);
 
 }
