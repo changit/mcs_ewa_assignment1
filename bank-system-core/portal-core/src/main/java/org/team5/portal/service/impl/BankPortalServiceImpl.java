@@ -97,7 +97,7 @@ public class BankPortalServiceImpl implements BankPortalService {
             trx.setDescription("Money Transferred to [" + transaction.getToAccount().getValue() + "] Account");
         } else {
             trx.setType("DR");
-            trx.setDescription("Money received from [ " + transaction.getFromAccount().getValue() + " Account]");
+            trx.setDescription("Money received from [ " + transaction.getFromAccount().getValue() + "] Account");
         }
         return trx;
     }
