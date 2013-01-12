@@ -5,6 +5,7 @@ import localhost._8080.bank_system_core_auth.UserNotFoundException_Exception;
 import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.team5.bank.core.server.service.model.xsd.*;
 import org.team5.portal.FormatUtil;
 import org.team5.portal.data.*;
@@ -35,6 +36,7 @@ public class BankPortalServiceImpl implements BankPortalService {
     private AuthService authService;
 
     @Override
+    @Transactional
     public FundTransferResponse transfer(FundTransferRequest request) {
 
         FundTransferResponse fundTransferResponse = new FundTransferResponse();
@@ -92,10 +94,11 @@ public class BankPortalServiceImpl implements BankPortalService {
         trx.setTransactionDate(transaction.getTimeStamp().getValue().toString());
         if(transaction.getType().getValue().equals("deposit")) {
             trx.setType("CR");
+            trx.setDescription("Money Transferred to [" + transaction.getToAccount() + "] Account");
         } else {
             trx.setType("DR");
+            trx.setDescription("Money received from [ " + transaction.getFromAccount() + " Account]");
         }
-        trx.setDescription("SUCCESS");
         return trx;
     }
 
@@ -108,7 +111,7 @@ public class BankPortalServiceImpl implements BankPortalService {
     	account.setUserId(String.valueOf(account1.getUserId()));
     	account.setAccountNo(account1.getAccountNo().getValue());
     	account.setAccountName("");
-    	account.setAccountType("Saving Account");
+    	account.setAccountType(account1.getDescription().getValue());
     	account.setBalance(String.valueOf(account1.getBalance()));
     	account.setCurrency("LKR");
     	accountList.add(account);
