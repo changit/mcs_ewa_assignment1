@@ -94,10 +94,10 @@ public class BankPortalServiceImpl implements BankPortalService {
         trx.setTransactionDate(transaction.getTimeStamp().getValue().toString());
         if(transaction.getType().getValue().equals("deposit")) {
             trx.setType("CR");
-            trx.setDescription("Money Transferred to [" + transaction.getToAccount() + "] Account");
+            trx.setDescription("Money Transferred to [" + transaction.getToAccount().getValue() + "] Account");
         } else {
             trx.setType("DR");
-            trx.setDescription("Money received from [ " + transaction.getFromAccount() + " Account]");
+            trx.setDescription("Money received from [ " + transaction.getFromAccount().getValue() + " Account]");
         }
         return trx;
     }
