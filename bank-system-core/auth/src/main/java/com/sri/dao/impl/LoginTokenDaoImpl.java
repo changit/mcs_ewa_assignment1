@@ -26,24 +26,6 @@ public class LoginTokenDaoImpl implements LoginTokenDao {
     }
 
     @Override
-    public boolean verifyToken(final Long userId, final String token) throws NoResultException {
-
-        Query query = em.createQuery(GET_USER_LAST_TOKEN_BY_USER_ID);
-        query.setParameter("userId", userId);
-        query.setMaxResults(1);
-
-        Object dbTokenObj = query.getSingleResult();
-
-        if (dbTokenObj != null) {
-            LoginToken loginToken = (LoginToken) dbTokenObj;
-
-            return loginToken.getLoginToken().equals(token);
-        }
-
-        return false;
-    }
-
-    @Override
     public LoginToken getLastLoginTokenByUserId(final Long userId) {
         Query query = em.createQuery(GET_USER_LAST_TOKEN_BY_USER_ID);
         query.setParameter("userId", userId);
