@@ -13,6 +13,7 @@
     </properties>
 
     <modules>
+        <module>legacy-core-system</module>
         <module>simulators</module>
         <module>bank-system-core</module>
     </modules>

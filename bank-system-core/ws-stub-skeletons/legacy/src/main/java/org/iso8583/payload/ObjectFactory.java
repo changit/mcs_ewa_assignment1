@@ -26,8 +26,8 @@ import org.team5.bank.core.server.service.model.xsd.TransactionResponse;
 @XmlRegistry
 public class ObjectFactory {
 
+    private final static QName _DepositResponseReturn_QNAME = new QName("http://iso8583.org/payload", "return");
     private final static QName _WithdrawAccountNo_QNAME = new QName("http://iso8583.org/payload", "accountNo");
-    private final static QName _GetAccountResponseReturn_QNAME = new QName("http://iso8583.org/payload", "return");
     private final static QName _FundTransferFrom_QNAME = new QName("http://iso8583.org/payload", "from");
     private final static QName _FundTransferTo_QNAME = new QName("http://iso8583.org/payload", "to");
 
@@ -39,19 +39,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAccount }
+     * Create an instance of {@link DepositResponse }
      * 
      */
-    public GetAccount createGetAccount() {
-        return new GetAccount();
-    }
-
-    /**
-     * Create an instance of {@link FundTransferResponse }
-     * 
-     */
-    public FundTransferResponse createFundTransferResponse() {
-        return new FundTransferResponse();
+    public DepositResponse createDepositResponse() {
+        return new DepositResponse();
     }
 
     /**
@@ -63,11 +55,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Withdraw }
+     * Create an instance of {@link GetTransactionHistoryResponse }
      * 
      */
-    public Withdraw createWithdraw() {
-        return new Withdraw();
+    public GetTransactionHistoryResponse createGetTransactionHistoryResponse() {
+        return new GetTransactionHistoryResponse();
+    }
+
+    /**
+     * Create an instance of {@link FundTransferResponse }
+     * 
+     */
+    public FundTransferResponse createFundTransferResponse() {
+        return new FundTransferResponse();
     }
 
     /**
@@ -76,6 +76,22 @@ public class ObjectFactory {
      */
     public GetBalanceResponse createGetBalanceResponse() {
         return new GetBalanceResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAccount }
+     * 
+     */
+    public GetAccount createGetAccount() {
+        return new GetAccount();
+    }
+
+    /**
+     * Create an instance of {@link Withdraw }
+     * 
+     */
+    public Withdraw createWithdraw() {
+        return new Withdraw();
     }
 
     /**
@@ -95,35 +111,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetTransactionHistoryResponse }
-     * 
-     */
-    public GetTransactionHistoryResponse createGetTransactionHistoryResponse() {
-        return new GetTransactionHistoryResponse();
-    }
-
-    /**
-     * Create an instance of {@link Deposit }
-     * 
-     */
-    public Deposit createDeposit() {
-        return new Deposit();
-    }
-
-    /**
      * Create an instance of {@link FundTransfer }
      * 
      */
     public FundTransfer createFundTransfer() {
         return new FundTransfer();
-    }
-
-    /**
-     * Create an instance of {@link DepositResponse }
-     * 
-     */
-    public DepositResponse createDepositResponse() {
-        return new DepositResponse();
     }
 
     /**
@@ -135,12 +127,20 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * Create an instance of {@link Deposit }
      * 
      */
-    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "accountNo", scope = Withdraw.class)
-    public JAXBElement<String> createWithdrawAccountNo(String value) {
-        return new JAXBElement<String>(_WithdrawAccountNo_QNAME, String.class, Withdraw.class, value);
+    public Deposit createDeposit() {
+        return new Deposit();
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = DepositResponse.class)
+    public JAXBElement<TransactionResponse> createDepositResponseReturn(TransactionResponse value) {
+        return new JAXBElement<TransactionResponse>(_DepositResponseReturn_QNAME, TransactionResponse.class, DepositResponse.class, value);
     }
 
     /**
@@ -149,7 +149,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = GetAccountResponse.class)
     public JAXBElement<Account> createGetAccountResponseReturn(Account value) {
-        return new JAXBElement<Account>(_GetAccountResponseReturn_QNAME, Account.class, GetAccountResponse.class, value);
+        return new JAXBElement<Account>(_DepositResponseReturn_QNAME, Account.class, GetAccountResponse.class, value);
     }
 
     /**
@@ -158,7 +158,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = FundTransferResponse.class)
     public JAXBElement<TransactionResponse> createFundTransferResponseReturn(TransactionResponse value) {
-        return new JAXBElement<TransactionResponse>(_GetAccountResponseReturn_QNAME, TransactionResponse.class, FundTransferResponse.class, value);
+        return new JAXBElement<TransactionResponse>(_DepositResponseReturn_QNAME, TransactionResponse.class, FundTransferResponse.class, value);
     }
 
     /**
@@ -167,7 +167,16 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = GetBalanceResponse.class)
     public JAXBElement<String> createGetBalanceResponseReturn(String value) {
-        return new JAXBElement<String>(_GetAccountResponseReturn_QNAME, String.class, GetBalanceResponse.class, value);
+        return new JAXBElement<String>(_DepositResponseReturn_QNAME, String.class, GetBalanceResponse.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "accountNo", scope = Withdraw.class)
+    public JAXBElement<String> createWithdrawAccountNo(String value) {
+        return new JAXBElement<String>(_WithdrawAccountNo_QNAME, String.class, Withdraw.class, value);
     }
 
     /**
@@ -185,16 +194,7 @@ public class ObjectFactory {
      */
     @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = WithdrawResponse.class)
     public JAXBElement<TransactionResponse> createWithdrawResponseReturn(TransactionResponse value) {
-        return new JAXBElement<TransactionResponse>(_GetAccountResponseReturn_QNAME, TransactionResponse.class, WithdrawResponse.class, value);
-    }
-
-    /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "accountNo", scope = Deposit.class)
-    public JAXBElement<String> createDepositAccountNo(String value) {
-        return new JAXBElement<String>(_WithdrawAccountNo_QNAME, String.class, Deposit.class, value);
+        return new JAXBElement<TransactionResponse>(_DepositResponseReturn_QNAME, TransactionResponse.class, WithdrawResponse.class, value);
     }
 
     /**
@@ -216,21 +216,21 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link JAXBElement }{@code <}{@link TransactionResponse }{@code >}}
-     * 
-     */
-    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "return", scope = DepositResponse.class)
-    public JAXBElement<TransactionResponse> createDepositResponseReturn(TransactionResponse value) {
-        return new JAXBElement<TransactionResponse>(_GetAccountResponseReturn_QNAME, TransactionResponse.class, DepositResponse.class, value);
-    }
-
-    /**
      * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
      * 
      */
     @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "accountNo", scope = GetBalance.class)
     public JAXBElement<String> createGetBalanceAccountNo(String value) {
         return new JAXBElement<String>(_WithdrawAccountNo_QNAME, String.class, GetBalance.class, value);
+    }
+
+    /**
+     * Create an instance of {@link JAXBElement }{@code <}{@link String }{@code >}}
+     * 
+     */
+    @XmlElementDecl(namespace = "http://iso8583.org/payload", name = "accountNo", scope = Deposit.class)
+    public JAXBElement<String> createDepositAccountNo(String value) {
+        return new JAXBElement<String>(_WithdrawAccountNo_QNAME, String.class, Deposit.class, value);
     }
 
 }

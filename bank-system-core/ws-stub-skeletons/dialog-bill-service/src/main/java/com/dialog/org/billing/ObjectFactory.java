@@ -35,11 +35,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BillPaidResponse }
+     * Create an instance of {@link BillPaid }
      * 
      */
-    public BillPaidResponse createBillPaidResponse() {
-        return new BillPaidResponse();
+    public BillPaid createBillPaid() {
+        return new BillPaid();
     }
 
     /**
@@ -51,11 +51,11 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BillPaid }
+     * Create an instance of {@link BillPaidResponse }
      * 
      */
-    public BillPaid createBillPaid() {
-        return new BillPaid();
+    public BillPaidResponse createBillPaidResponse() {
+        return new BillPaidResponse();
     }
 
     /**

@@ -22,7 +22,6 @@
     </dependencies>
 
     <modules>
-        <module>bank-system-core-server</module>
         <module>auth</module>
         <module>ws-stub-skeletons</module>
         <module>portal-core</module>
