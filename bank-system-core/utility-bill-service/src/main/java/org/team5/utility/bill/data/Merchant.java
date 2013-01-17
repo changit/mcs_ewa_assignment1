@@ -11,6 +11,7 @@ public class Merchant {
 
     private String id;
     private String name;
+    private String bankAccount;
     private String description;
 
     public String getId() {
@@ -35,5 +36,13 @@ public class Merchant {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getBankAccount() {
+        return bankAccount;
+    }
+
+    public void setBankAccount(String bankAccount) {
+        this.bankAccount = bankAccount;
     }
 }

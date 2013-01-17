@@ -38,6 +38,22 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link AuthenticateResponse }
+     * 
+     */
+    public AuthenticateResponse createAuthenticateResponse() {
+        return new AuthenticateResponse();
+    }
+
+    /**
+     * Create an instance of {@link VerifyTokenResponse }
+     * 
+     */
+    public VerifyTokenResponse createVerifyTokenResponse() {
+        return new VerifyTokenResponse();
+    }
+
+    /**
      * Create an instance of {@link VerifyToken }
      * 
      */
@@ -67,22 +83,6 @@ public class ObjectFactory {
      */
     public UserNotFoundException createUserNotFoundException() {
         return new UserNotFoundException();
-    }
-
-    /**
-     * Create an instance of {@link AuthenticateResponse }
-     * 
-     */
-    public AuthenticateResponse createAuthenticateResponse() {
-        return new AuthenticateResponse();
-    }
-
-    /**
-     * Create an instance of {@link VerifyTokenResponse }
-     * 
-     */
-    public VerifyTokenResponse createVerifyTokenResponse() {
-        return new VerifyTokenResponse();
     }
 
     /**

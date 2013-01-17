@@ -16,6 +16,8 @@
     <modules>
         <module>auth</module>
         <module>legacy</module>
+        <module>portal</module>
+        <module>dialog-bill-service</module>
     </modules>
 
 </project>

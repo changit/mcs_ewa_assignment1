@@ -13,6 +13,8 @@ public class PayBillRequest {
     private String fromAccount;
     private String merchantId;
     private String amount;
+    private Long userId;
+    private String loginToken;
 
     public String getRequestId() {
         return requestId;
@@ -44,5 +46,21 @@ public class PayBillRequest {
 
     public void setAmount(String amount) {
         this.amount = amount;
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
+    }
+
+    public String getLoginToken() {
+        return loginToken;
+    }
+
+    public void setLoginToken(String loginToken) {
+        this.loginToken = loginToken;
     }
 }
