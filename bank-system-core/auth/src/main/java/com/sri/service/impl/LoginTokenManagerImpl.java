@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.NoResultException;
+import java.util.Calendar;
 
 /**
  * User: Gihan Anuruddha
@@ -29,10 +30,20 @@ public class LoginTokenManagerImpl implements LoginTokenManager {
     @Transactional
     public boolean verifyToken(final Long userId, final String token) throws UserNotFoundException {
 
-        boolean result;
+        boolean result = false;
 
         try {
-            result = loginTokenDao.verifyToken(userId, token);
+            LoginToken lastToken = loginTokenDao.getLastLoginTokenByUserId(userId);
+            if (lastToken != null) {
+                if (lastToken.getLoginToken().equals(token)) {
+                    Calendar current = Calendar.getInstance();
+                    current.add(Calendar.MINUTE, -30);
+
+                    if (!current.getTime().after(lastToken.getTokenCreatedTime())) {
+                        result = true;
+                    }
+                }
+            }
         } catch (NoResultException ex) {
             throw new UserNotFoundException("Unable to found user :" + userId);
         }

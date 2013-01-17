@@ -29,7 +29,7 @@
                             </defaultOptions>
                             <wsdlOptions>
                                 <wsdlOption>
-                                    <wsdl>http://localhost:8081/dialog-gsm-bill-service/PayBill?wsdl</wsdl>
+                                    <wsdl>http://ec2-67-202-56-114.compute-1.amazonaws.com:20090/dialog-gsm-bill-service/PayBill?wsdl</wsdl>
                                 </wsdlOption>
                             </wsdlOptions>
                         </configuration>

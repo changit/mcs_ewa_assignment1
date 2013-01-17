@@ -43,14 +43,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAccountHistory }
-     * 
-     */
-    public GetAccountHistory createGetAccountHistory() {
-        return new GetAccountHistory();
-    }
-
-    /**
      * Create an instance of {@link CreditCardAccount }
      * 
      */
@@ -64,22 +56,6 @@ public class ObjectFactory {
      */
     public GetCreditCardList createGetCreditCardList() {
         return new GetCreditCardList();
-    }
-
-    /**
-     * Create an instance of {@link Transfer }
-     * 
-     */
-    public Transfer createTransfer() {
-        return new Transfer();
-    }
-
-    /**
-     * Create an instance of {@link GetAccountHistoryResponse }
-     * 
-     */
-    public GetAccountHistoryResponse createGetAccountHistoryResponse() {
-        return new GetAccountHistoryResponse();
     }
 
     /**
@@ -99,11 +75,75 @@ public class ObjectFactory {
     }
 
     /**
+     * Create an instance of {@link GetAccountListResponse }
+     * 
+     */
+    public GetAccountListResponse createGetAccountListResponse() {
+        return new GetAccountListResponse();
+    }
+
+    /**
+     * Create an instance of {@link FundTransferResponse }
+     * 
+     */
+    public FundTransferResponse createFundTransferResponse() {
+        return new FundTransferResponse();
+    }
+
+    /**
+     * Create an instance of {@link Transfer }
+     * 
+     */
+    public Transfer createTransfer() {
+        return new Transfer();
+    }
+
+    /**
+     * Create an instance of {@link GetAccountHistoryResponse }
+     * 
+     */
+    public GetAccountHistoryResponse createGetAccountHistoryResponse() {
+        return new GetAccountHistoryResponse();
+    }
+
+    /**
+     * Create an instance of {@link Transaction }
+     * 
+     */
+    public Transaction createTransaction() {
+        return new Transaction();
+    }
+
+    /**
      * Create an instance of {@link FundTransferRequest }
      * 
      */
     public FundTransferRequest createFundTransferRequest() {
         return new FundTransferRequest();
+    }
+
+    /**
+     * Create an instance of {@link Account }
+     * 
+     */
+    public Account createAccount() {
+        return new Account();
+    }
+
+    /**
+     * Create an instance of {@link GetCreditCardTransactionByCardIdResponse }
+     * 
+     */
+    public GetCreditCardTransactionByCardIdResponse createGetCreditCardTransactionByCardIdResponse() {
+        return new GetCreditCardTransactionByCardIdResponse();
+    }
+
+    /**
+     * Create an instance of {@link GetAccountHistory }
+     * 
+     */
+    public GetAccountHistory createGetAccountHistory() {
+        return new GetAccountHistory();
     }
 
     /**
@@ -120,46 +160,6 @@ public class ObjectFactory {
      */
     public GetCreditCardTransactionByCardId createGetCreditCardTransactionByCardId() {
         return new GetCreditCardTransactionByCardId();
-    }
-
-    /**
-     * Create an instance of {@link Account }
-     * 
-     */
-    public Account createAccount() {
-        return new Account();
-    }
-
-    /**
-     * Create an instance of {@link FundTransferResponse }
-     * 
-     */
-    public FundTransferResponse createFundTransferResponse() {
-        return new FundTransferResponse();
-    }
-
-    /**
-     * Create an instance of {@link GetAccountListResponse }
-     * 
-     */
-    public GetAccountListResponse createGetAccountListResponse() {
-        return new GetAccountListResponse();
-    }
-
-    /**
-     * Create an instance of {@link Transaction }
-     * 
-     */
-    public Transaction createTransaction() {
-        return new Transaction();
-    }
-
-    /**
-     * Create an instance of {@link GetCreditCardTransactionByCardIdResponse }
-     * 
-     */
-    public GetCreditCardTransactionByCardIdResponse createGetCreditCardTransactionByCardIdResponse() {
-        return new GetCreditCardTransactionByCardIdResponse();
     }
 
     /**

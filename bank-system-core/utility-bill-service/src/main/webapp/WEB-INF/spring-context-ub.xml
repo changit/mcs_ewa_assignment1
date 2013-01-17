@@ -24,7 +24,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
             />
 
     <jaxws:client id="dialog_bill_listener"
-                  serviceClass="dialog.gsm.impl.BillPaymentListenerServiceImplService"
+                  serviceClass="com.dialog.org.billing.BillPaymentListenerService"
                   address="http://localhost:8081/dialog-gsm-bill-service/PayBill?wsdl"
             />
 

@@ -11,6 +11,10 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
+    <properties>
+        <jetty.port>20080</jetty.port>
+    </properties>
+
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -63,28 +67,13 @@
                 <configuration>
                     <stopPort>9966</stopPort>
                     <stopKey>foo</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>20080</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>org.apache.cxf</groupId>
-                <artifactId>cxf-java2ws-plugin</artifactId>
-                <version>2.6.2</version>
-
-                <executions>
-                    <execution>
-                        <id>process-classes</id>
-                        <phase>install</phase>
-                        <configuration>
-                            <className>com.sri.service.AuthService</className>
-                            <genWsdl>true</genWsdl>
-                            <verbose>true</verbose>
-                        </configuration>
-                        <goals>
-                            <goal>java2ws</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
 

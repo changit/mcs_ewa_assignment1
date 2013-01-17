@@ -31,31 +31,16 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
                 <configuration>
-                    <stopPort>6966</stopPort>
+                    <stopPort>6976</stopPort>
                     <stopKey>foo</stopKey>
+                    <systemProperties>
+                        <systemProperty>
+                            <name>jetty.port</name>
+                            <value>20090</value>
+                        </systemProperty>
+                    </systemProperties>
                 </configuration>
             </plugin>
-            
-            <plugin>
-				<groupId>org.apache.cxf</groupId>
-				<artifactId>cxf-java2ws-plugin</artifactId>
-				<version>2.6.2</version>
-
-				<executions>
-					<execution>
-						<id>process-classes</id>
-						<phase>install</phase>
-						<configuration>
-							<className>abc.payment.PaymentService</className>
-							<genWsdl>true</genWsdl>
-							<verbose>true</verbose>
-						</configuration>
-					<goals>
-						<goal>java2ws</goal>
-					</goals>
-				</execution>
-			</executions>
-	</plugin>
     </plugins>
         
         
