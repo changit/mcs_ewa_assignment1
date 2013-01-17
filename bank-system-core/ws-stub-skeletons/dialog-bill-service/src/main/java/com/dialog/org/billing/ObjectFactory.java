@@ -35,19 +35,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link BillReceipt }
-     * 
-     */
-    public BillReceipt createBillReceipt() {
-        return new BillReceipt();
-    }
-
-    /**
      * Create an instance of {@link BillPaidResponse }
      * 
      */
     public BillPaidResponse createBillPaidResponse() {
         return new BillPaidResponse();
+    }
+
+    /**
+     * Create an instance of {@link BillReceipt }
+     * 
+     */
+    public BillReceipt createBillReceipt() {
+        return new BillReceipt();
     }
 
     /**

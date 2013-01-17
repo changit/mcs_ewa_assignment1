@@ -63,4 +63,16 @@ public class PayBillRequest {
     public void setLoginToken(String loginToken) {
         this.loginToken = loginToken;
     }
+
+    @Override
+    public String toString() {
+        return "PayBillRequest{" +
+                "requestId='" + requestId + '\'' +
+                ", fromAccount='" + fromAccount + '\'' +
+                ", merchantId='" + merchantId + '\'' +
+                ", amount='" + amount + '\'' +
+                ", userId=" + userId +
+                ", loginToken='" + loginToken + '\'' +
+                '}';
+    }
 }

@@ -43,22 +43,6 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link CreditCardAccount }
-     * 
-     */
-    public CreditCardAccount createCreditCardAccount() {
-        return new CreditCardAccount();
-    }
-
-    /**
-     * Create an instance of {@link GetCreditCardList }
-     * 
-     */
-    public GetCreditCardList createGetCreditCardList() {
-        return new GetCreditCardList();
-    }
-
-    /**
      * Create an instance of {@link GetCreditCardListResponse }
      * 
      */
@@ -67,11 +51,35 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link GetAccountList }
+     * Create an instance of {@link Transfer }
      * 
      */
-    public GetAccountList createGetAccountList() {
-        return new GetAccountList();
+    public Transfer createTransfer() {
+        return new Transfer();
+    }
+
+    /**
+     * Create an instance of {@link FundTransferRequest }
+     * 
+     */
+    public FundTransferRequest createFundTransferRequest() {
+        return new FundTransferRequest();
+    }
+
+    /**
+     * Create an instance of {@link Transaction }
+     * 
+     */
+    public Transaction createTransaction() {
+        return new Transaction();
+    }
+
+    /**
+     * Create an instance of {@link GetCreditCardList }
+     * 
+     */
+    public GetCreditCardList createGetCreditCardList() {
+        return new GetCreditCardList();
     }
 
     /**
@@ -91,35 +99,27 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link Transfer }
+     * Create an instance of {@link GetCreditCardTransactionByCardId }
      * 
      */
-    public Transfer createTransfer() {
-        return new Transfer();
+    public GetCreditCardTransactionByCardId createGetCreditCardTransactionByCardId() {
+        return new GetCreditCardTransactionByCardId();
     }
 
     /**
-     * Create an instance of {@link GetAccountHistoryResponse }
+     * Create an instance of {@link TransferResponse }
      * 
      */
-    public GetAccountHistoryResponse createGetAccountHistoryResponse() {
-        return new GetAccountHistoryResponse();
+    public TransferResponse createTransferResponse() {
+        return new TransferResponse();
     }
 
     /**
-     * Create an instance of {@link Transaction }
+     * Create an instance of {@link CreditCardAccount }
      * 
      */
-    public Transaction createTransaction() {
-        return new Transaction();
-    }
-
-    /**
-     * Create an instance of {@link FundTransferRequest }
-     * 
-     */
-    public FundTransferRequest createFundTransferRequest() {
-        return new FundTransferRequest();
+    public CreditCardAccount createCreditCardAccount() {
+        return new CreditCardAccount();
     }
 
     /**
@@ -147,19 +147,19 @@ public class ObjectFactory {
     }
 
     /**
-     * Create an instance of {@link TransferResponse }
+     * Create an instance of {@link GetAccountHistoryResponse }
      * 
      */
-    public TransferResponse createTransferResponse() {
-        return new TransferResponse();
+    public GetAccountHistoryResponse createGetAccountHistoryResponse() {
+        return new GetAccountHistoryResponse();
     }
 
     /**
-     * Create an instance of {@link GetCreditCardTransactionByCardId }
+     * Create an instance of {@link GetAccountList }
      * 
      */
-    public GetCreditCardTransactionByCardId createGetCreditCardTransactionByCardId() {
-        return new GetCreditCardTransactionByCardId();
+    public GetAccountList createGetAccountList() {
+        return new GetAccountList();
     }
 
     /**

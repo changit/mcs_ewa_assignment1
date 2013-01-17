@@ -72,4 +72,17 @@ public class FundTransferRequest {
     public void setUserId(Long userId) {
         this.userId = userId;
     }
+
+    @Override
+    public String toString() {
+        return "FundTransferRequest{" +
+                "userId=" + userId +
+                ", requestId='" + requestId + '\'' +
+                ", fromAccount='" + fromAccount + '\'' +
+                ", toAccount='" + toAccount + '\'' +
+                ", amount='" + amount + '\'' +
+                ", transactionPassword='" + transactionPassword + '\'' +
+                ", loginToken='" + loginToken + '\'' +
+                '}';
+    }
 }

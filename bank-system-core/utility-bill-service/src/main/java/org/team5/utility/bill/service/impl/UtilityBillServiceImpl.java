@@ -4,6 +4,8 @@ import com.sribank.org.portal.BankPortalService;
 import com.sribank.org.portal.FundTransferCode;
 import com.sribank.org.portal.FundTransferRequest;
 import com.sribank.org.portal.FundTransferResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.team5.portal.service.impl.BankPortalServiceImplService;
@@ -28,6 +30,7 @@ import java.util.Map;
 @WebService(endpointInterface = "org.team5.utility.bill.service.UtilityBillService")
 public class UtilityBillServiceImpl implements UtilityBillService {
 
+    private static final Logger logger = LoggerFactory.getLogger(UtilityBillServiceImpl.class);
 
     private Map<String, Merchant> merchantMap;
     private List<Merchant> merchantList;
@@ -46,6 +49,9 @@ public class UtilityBillServiceImpl implements UtilityBillService {
 
     @Override
     public PayBillResponse pay(PayBillRequest payBillRequest) {
+
+        logger.info("Pay Bill Request Received [{}]", payBillRequest);
+
         PayBillResponse payBillResponse = new PayBillResponse();
         System.err.println("MErchant mnap" + merchantMap);
         Merchant merchant = (Merchant) merchantMap.get(String.valueOf(payBillRequest.getMerchantId()));
@@ -94,14 +100,14 @@ public class UtilityBillServiceImpl implements UtilityBillService {
         try {
             MerchantConnector connector = merchantConnectorMap.get(merchant.getId());
             if(connector == null) {
-                System.err.println("No merchant connector found to notify");
+                logger.error("No merchant connector found to notify");
                 return;
             }
 
             connector.notifyMerchant(payBillReceipt);
 
         }catch (Exception e) {
-            //TODO if this is a temporary error try again later
+            logger.error("Unexpected Error Occurred", e);
         }
     }
 

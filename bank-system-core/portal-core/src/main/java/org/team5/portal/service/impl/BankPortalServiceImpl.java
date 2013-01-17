@@ -4,6 +4,8 @@ import localhost._8080.bank_system_core_auth.AuthService;
 import localhost._8080.bank_system_core_auth.UserNotFoundException_Exception;
 import org.iso8583.payload.CoreServicePortType;
 import org.iso8583.payload.FundTransfer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.team5.bank.core.server.service.model.xsd.*;
@@ -29,6 +31,8 @@ import java.util.List;
 @WebService(endpointInterface = "org.team5.portal.service.BankPortalService")
 public class BankPortalServiceImpl implements BankPortalService {
 
+    private static final Logger logger = LoggerFactory.getLogger(BankPortalServiceImpl.class);
+
     @Autowired
     private CoreServicePortType legacyService;
 
@@ -38,6 +42,8 @@ public class BankPortalServiceImpl implements BankPortalService {
     @Override
     @Transactional
     public FundTransferResponse transfer(FundTransferRequest request) {
+
+        logger.info("Fund Transfer request Received. [{}]", request);
 
         FundTransferResponse fundTransferResponse = new FundTransferResponse();
         boolean authorized = false;
@@ -64,6 +70,8 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
     public List<Transaction> getAccountHistory(String accountNo, Long userId, String loginToken) {
+
+        logger.info("Get Account History Request Received. accountNo [{}], userId [{}] ", accountNo, userId );
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
 
@@ -105,6 +113,9 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
 	public  List<Account> getAccountList(Long userId,String loginToken){
+
+        logger.info("Get Account List Request received userId [{}]", userId);
+
         org.team5.bank.core.server.service.model.xsd.Account account1 = legacyService.getAccount(userId);
         List<Account> accountList = new ArrayList<Account>();
     	Account account= new Account();
@@ -120,6 +131,8 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
     public List<CreditCardAccount> getCreditCardList(Long userId, String loginToken) {
+
+        logger.info("Get Credit Card List Request Received userId [{}]", userId);
 
         List<CreditCardAccount> cards = new ArrayList<CreditCardAccount>();
 
@@ -156,6 +169,8 @@ public class BankPortalServiceImpl implements BankPortalService {
 
     @Override
     public List<Transaction> getCreditCardTransactionByCardId(@WebParam(name = "cardId") String cardId, Long userId, String loginToken) {
+
+        logger.info("Get Credit Card Transaction By Card ID Received userId [{}], cardId[{}]", userId, cardId);
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
 

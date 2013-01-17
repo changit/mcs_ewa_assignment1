@@ -25,7 +25,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
     <jaxws:client id="dialog_bill_listener"
                   serviceClass="com.dialog.org.billing.BillPaymentListenerService"
-                  address="http://localhost:8081/dialog-gsm-bill-service/PayBill?wsdl"
+                  address="http://localhost:20082/utility-bill-service/PayBill"
             />
 
     <util:map id="merchentMap" map-class="java.util.HashMap" key-type="java.lang.String" value-type="org.team5.utility.bill.data.Merchant">

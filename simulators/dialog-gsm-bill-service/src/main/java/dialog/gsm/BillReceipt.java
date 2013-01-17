@@ -36,4 +36,13 @@ public class BillReceipt {
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
     }
+
+    @Override
+    public String toString() {
+        return "BillReceipt{" +
+                "amount='" + amount + '\'' +
+                ", accountNo='" + accountNo + '\'' +
+                ", dateTime='" + dateTime + '\'' +
+                '}';
+    }
 }

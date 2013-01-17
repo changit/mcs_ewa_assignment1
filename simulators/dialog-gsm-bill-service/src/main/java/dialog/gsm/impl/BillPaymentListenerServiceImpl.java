@@ -2,6 +2,8 @@ package dialog.gsm.impl;
 
 import dialog.gsm.BillPaymentListenerService;
 import dialog.gsm.BillReceipt;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.jws.WebService;
 
@@ -15,9 +17,11 @@ import javax.jws.WebService;
 @WebService(endpointInterface = "dialog.gsm.BillPaymentListenerService")
 public class BillPaymentListenerServiceImpl implements BillPaymentListenerService {
 
+    private static Logger logger = LoggerFactory.getLogger(BillPaymentListenerServiceImpl.class);
+
     @Override
     public boolean billPaid(BillReceipt billReceipt) {
-        System.out.println("Bill Receipt Received accNo [ " + billReceipt.getAccountNo() + " ] amount [ " + billReceipt.getAmount() + " ]");
+        logger.info("Notification Received [{}]", billReceipt);
         return true;
     }
 }
