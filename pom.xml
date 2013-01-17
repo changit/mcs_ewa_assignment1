@@ -13,8 +13,8 @@
     </properties>
 
     <modules>
-        <module>legacy-core-system</module>
-        <module>portal-core-system</module>
+        <module>legacy-system-core</module>
+        <module>portal-system-core</module>
         <module>simulators</module>
     </modules>
 
