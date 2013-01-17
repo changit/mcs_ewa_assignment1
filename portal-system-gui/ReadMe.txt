@@ -1,0 +1,1 @@
+Copy bank folder to apache web root and change required ws url configuration as required.
