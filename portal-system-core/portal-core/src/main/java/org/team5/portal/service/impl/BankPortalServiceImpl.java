@@ -56,10 +56,14 @@ public class BankPortalServiceImpl implements BankPortalService {
 
         if (authorized) {
             TransactionResponse fundTransfer = legacyService.fundTransfer(request.getFromAccount(), request.getToAccount(), Double.parseDouble(request.getAmount()));
-
-            fundTransferResponse.setDescription("Money Transferred successfully");
-            fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
-            fundTransferResponse.setTransactionId(String.valueOf(fundTransfer.getTransactionID().getValue()));
+            if (fundTransfer.getStatus().getValue().equalsIgnoreCase("success")) {
+                fundTransferResponse.setDescription("Money Transferred successfully");
+                fundTransferResponse.setResultCode(FundTransferCode.SUCCESS_0000);
+                fundTransferResponse.setTransactionId(String.valueOf(fundTransfer.getTransactionID().getValue()));
+            } else {
+                fundTransferResponse.setResultCode(FundTransferCode.FAILED_0002);
+                fundTransferResponse.setDescription(fundTransfer.getError().getValue());
+            }
             fundTransferResponse.setSourceId(request.getRequestId());
         } else {
             fundTransferResponse.setResultCode(FundTransferCode.FAILED_0001);
@@ -71,11 +75,11 @@ public class BankPortalServiceImpl implements BankPortalService {
     @Override
     public List<Transaction> getAccountHistory(String accountNo, Long userId, String loginToken) {
 
-        logger.info("Get Account History Request Received. accountNo [{}], userId [{}] ", accountNo, userId );
+        logger.info("Get Account History Request Received. accountNo [{}], userId [{}] ", accountNo, userId);
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
 
-        if(!verifyUser(userId, loginToken)) {
+        if (!verifyUser(userId, loginToken)) {
             return transactionList;
         }
 
@@ -87,7 +91,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         return transactionList;
     }
 
-    private boolean verifyUser(Long userId, String loginToken){
+    private boolean verifyUser(Long userId, String loginToken) {
         try {
             return authService.verifyToken(userId, loginToken);
         } catch (UserNotFoundException_Exception e) {
@@ -100,7 +104,7 @@ public class BankPortalServiceImpl implements BankPortalService {
         trx.setAmount(String.valueOf(transaction.getAmount()));
         trx.setEffectiveDate(FormatUtil.formatDate(transaction.getTimeStamp().getValue()));
         trx.setTransactionDate(FormatUtil.formatDate(transaction.getTimeStamp().getValue()));
-        if(transaction.getType().getValue().equals("deposit")) {
+        if (transaction.getType().getValue().equals("deposit")) {
             trx.setType("CR");
             trx.setDescription("Money Transferred to [" + transaction.getToAccount().getValue() + "] Account");
         } else {
@@ -112,21 +116,21 @@ public class BankPortalServiceImpl implements BankPortalService {
 
 
     @Override
-	public  List<Account> getAccountList(Long userId,String loginToken){
+    public List<Account> getAccountList(Long userId, String loginToken) {
 
         logger.info("Get Account List Request received userId [{}]", userId);
 
         org.team5.bank.core.server.service.model.xsd.Account account1 = legacyService.getAccount(userId);
         List<Account> accountList = new ArrayList<Account>();
-    	Account account= new Account();
-    	account.setUserId(String.valueOf(account1.getUserId()));
-    	account.setAccountNo(account1.getAccountNo().getValue());
-    	account.setAccountName("");
-    	account.setAccountType(account1.getDescription().getValue());
-    	account.setBalance(String.valueOf(account1.getBalance()));
-    	account.setCurrency("LKR");
-    	accountList.add(account);
-    	return accountList;
+        Account account = new Account();
+        account.setUserId(String.valueOf(account1.getUserId()));
+        account.setAccountNo(account1.getAccountNo().getValue());
+        account.setAccountName("");
+        account.setAccountType(account1.getDescription().getValue());
+        account.setBalance(String.valueOf(account1.getBalance()));
+        account.setCurrency("LKR");
+        accountList.add(account);
+        return accountList;
     }
 
     @Override
@@ -136,7 +140,7 @@ public class BankPortalServiceImpl implements BankPortalService {
 
         List<CreditCardAccount> cards = new ArrayList<CreditCardAccount>();
 
-        if(!verifyUser(userId, loginToken)) {
+        if (!verifyUser(userId, loginToken)) {
             return cards;
         }
 
@@ -174,7 +178,7 @@ public class BankPortalServiceImpl implements BankPortalService {
 
         List<Transaction> transactionList = new ArrayList<Transaction>();
 
-        if(!verifyUser(userId, loginToken)) {
+        if (!verifyUser(userId, loginToken)) {
             return transactionList;
         }
 
