@@ -1,0 +1,474 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="CoreService"
+       transports="https http"
+       startOnLoad="true"
+       trace="disable">
+   <description/>
+   <target>
+      <inSequence>
+         <property name="transport.tcp.contentType"
+                   value="application/iso8583"
+                   scope="transport"/>
+         <property name="DISABLE_CHUNKING"
+                   value="true"
+                   scope="axis2"
+                   type="STRING"/>
+         <log level="full">
+            <property name="RequestXML======================="
+                      value="====================================="/>
+         </log>
+         <property name="messageType" value="application/iso8583" scope="axis2"/>
+         <property name="contentType" value="application/iso8583" scope="axis2"/>
+         <property name="tcp.secure" value="true" scope="axis2"/>
+         <send>
+            <endpoint>
+               <address uri="tcp://localhost:2001/">
+                  <enableAddressing/>
+               </address>
+            </endpoint>
+         </send>
+      </inSequence>
+      <outSequence>
+         <log level="full">
+            <property name="responseText======================="
+                      value="====================================="/>
+         </log>
+         <send/>
+      </outSequence>
+   </target>
+   <publishWSDL>
+      <wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+                        xmlns:ns1="http://org.apache.axis2/xsd"
+                        xmlns:ns="http://iso8583.org/payload"
+                        xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
+                        xmlns:http="http://schemas.xmlsoap.org/wsdl/http/"
+                        xmlns:ax2496="http://model.service.server.core.bank.team5.org/xsd"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+                        xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/"
+                        xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/"
+                        targetNamespace="http://iso8583.org/payload">
+         <wsdl:documentation>CoreService</wsdl:documentation>
+         <wsdl:types>
+            <xs:schema attributeFormDefault="qualified"
+                       elementFormDefault="qualified"
+                       targetNamespace="http://model.service.server.core.bank.team5.org/xsd">
+               <xs:complexType name="TransactionResponse">
+                  <xs:sequence>
+                     <xs:element minOccurs="0" name="error" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0" name="status" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0"
+                                 name="transactionID"
+                                 nillable="true"
+                                 type="xs:double"/>
+                  </xs:sequence>
+               </xs:complexType>
+               <xs:complexType name="Transaction">
+                  <xs:sequence>
+                     <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                     <xs:element minOccurs="0"
+                                 name="fromAccount"
+                                 nillable="true"
+                                 type="xs:string"/>
+                     <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                     <xs:element minOccurs="0" name="timeStamp" nillable="true" type="xs:date"/>
+                     <xs:element minOccurs="0" name="toAccount" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0" name="type" nillable="true" type="xs:string"/>
+                  </xs:sequence>
+               </xs:complexType>
+               <xs:complexType name="Account">
+                  <xs:sequence>
+                     <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                     <xs:element minOccurs="0" name="balance" type="xs:double"/>
+                     <xs:element minOccurs="0"
+                                 name="description"
+                                 nillable="true"
+                                 type="xs:string"/>
+                     <xs:element minOccurs="0" name="id" nillable="true" type="xs:long"/>
+                     <xs:element minOccurs="0" name="userId" type="xs:long"/>
+                  </xs:sequence>
+               </xs:complexType>
+            </xs:schema>
+            <xs:schema xmlns:ax2497="http://model.service.server.core.bank.team5.org/xsd"
+                       attributeFormDefault="qualified"
+                       elementFormDefault="qualified"
+                       targetNamespace="http://iso8583.org/payload">
+               <xs:import namespace="http://model.service.server.core.bank.team5.org/xsd"/>
+               <xs:element name="withdraw">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="withdrawResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getTransactionHistory">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getTransactionHistoryResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element maxOccurs="unbounded"
+                                    minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:Transaction"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getBalance">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getBalanceResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="return" nillable="true" type="xs:string"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getAccount">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="userId" type="xs:long"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="getAccountResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:Account"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="fundTransfer">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="from" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="to" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="fundTransferResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="deposit">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0" name="accountNo" nillable="true" type="xs:string"/>
+                        <xs:element minOccurs="0" name="amount" type="xs:double"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+               <xs:element name="depositResponse">
+                  <xs:complexType>
+                     <xs:sequence>
+                        <xs:element minOccurs="0"
+                                    name="return"
+                                    nillable="true"
+                                    type="ax2496:TransactionResponse"/>
+                     </xs:sequence>
+                  </xs:complexType>
+               </xs:element>
+            </xs:schema>
+         </wsdl:types>
+         <wsdl:message name="withdrawRequest">
+            <wsdl:part name="parameters" element="ns:withdraw"/>
+         </wsdl:message>
+         <wsdl:message name="withdrawResponse">
+            <wsdl:part name="parameters" element="ns:withdrawResponse"/>
+         </wsdl:message>
+         <wsdl:message name="getTransactionHistoryRequest">
+            <wsdl:part name="parameters" element="ns:getTransactionHistory"/>
+         </wsdl:message>
+         <wsdl:message name="getTransactionHistoryResponse">
+            <wsdl:part name="parameters" element="ns:getTransactionHistoryResponse"/>
+         </wsdl:message>
+         <wsdl:message name="depositRequest">
+            <wsdl:part name="parameters" element="ns:deposit"/>
+         </wsdl:message>
+         <wsdl:message name="depositResponse">
+            <wsdl:part name="parameters" element="ns:depositResponse"/>
+         </wsdl:message>
+         <wsdl:message name="getBalanceRequest">
+            <wsdl:part name="parameters" element="ns:getBalance"/>
+         </wsdl:message>
+         <wsdl:message name="getBalanceResponse">
+            <wsdl:part name="parameters" element="ns:getBalanceResponse"/>
+         </wsdl:message>
+         <wsdl:message name="fundTransferRequest">
+            <wsdl:part name="parameters" element="ns:fundTransfer"/>
+         </wsdl:message>
+         <wsdl:message name="fundTransferResponse">
+            <wsdl:part name="parameters" element="ns:fundTransferResponse"/>
+         </wsdl:message>
+         <wsdl:message name="getAccountRequest">
+            <wsdl:part name="parameters" element="ns:getAccount"/>
+         </wsdl:message>
+         <wsdl:message name="getAccountResponse">
+            <wsdl:part name="parameters" element="ns:getAccountResponse"/>
+         </wsdl:message>
+         <wsdl:portType name="CoreServicePortType">
+            <wsdl:operation name="withdraw">
+               <wsdl:input message="ns:withdrawRequest" wsaw:Action="urn:withdraw"/>
+               <wsdl:output message="ns:withdrawResponse" wsaw:Action="urn:withdrawResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="getTransactionHistory">
+               <wsdl:input message="ns:getTransactionHistoryRequest"
+                           wsaw:Action="urn:getTransactionHistory"/>
+               <wsdl:output message="ns:getTransactionHistoryResponse"
+                            wsaw:Action="urn:getTransactionHistoryResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="deposit">
+               <wsdl:input message="ns:depositRequest" wsaw:Action="urn:deposit"/>
+               <wsdl:output message="ns:depositResponse" wsaw:Action="urn:depositResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="getBalance">
+               <wsdl:input message="ns:getBalanceRequest" wsaw:Action="urn:getBalance"/>
+               <wsdl:output message="ns:getBalanceResponse" wsaw:Action="urn:getBalanceResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="fundTransfer">
+               <wsdl:input message="ns:fundTransferRequest" wsaw:Action="urn:fundTransfer"/>
+               <wsdl:output message="ns:fundTransferResponse"
+                            wsaw:Action="urn:fundTransferResponse"/>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <wsdl:input message="ns:getAccountRequest" wsaw:Action="urn:getAccount"/>
+               <wsdl:output message="ns:getAccountResponse" wsaw:Action="urn:getAccountResponse"/>
+            </wsdl:operation>
+         </wsdl:portType>
+         <wsdl:binding name="CoreServiceSoap11Binding" type="ns:CoreServicePortType">
+            <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+            <wsdl:operation name="withdraw">
+               <soap:operation soapAction="urn:withdraw" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getTransactionHistory">
+               <soap:operation soapAction="urn:getTransactionHistory" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="deposit">
+               <soap:operation soapAction="urn:deposit" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getBalance">
+               <soap:operation soapAction="urn:getBalance" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="fundTransfer">
+               <soap:operation soapAction="urn:fundTransfer" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <soap:operation soapAction="urn:getAccount" style="document"/>
+               <wsdl:input>
+                  <soap:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+         </wsdl:binding>
+         <wsdl:binding name="CoreServiceSoap12Binding" type="ns:CoreServicePortType">
+            <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+            <wsdl:operation name="withdraw">
+               <soap12:operation soapAction="urn:withdraw" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getTransactionHistory">
+               <soap12:operation soapAction="urn:getTransactionHistory" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="deposit">
+               <soap12:operation soapAction="urn:deposit" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getBalance">
+               <soap12:operation soapAction="urn:getBalance" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="fundTransfer">
+               <soap12:operation soapAction="urn:fundTransfer" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <soap12:operation soapAction="urn:getAccount" style="document"/>
+               <wsdl:input>
+                  <soap12:body use="literal"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <soap12:body use="literal"/>
+               </wsdl:output>
+            </wsdl:operation>
+         </wsdl:binding>
+         <wsdl:binding name="CoreServiceHttpBinding" type="ns:CoreServicePortType">
+            <http:binding verb="POST"/>
+            <wsdl:operation name="withdraw">
+               <http:operation location="withdraw"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getTransactionHistory">
+               <http:operation location="getTransactionHistory"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="deposit">
+               <http:operation location="deposit"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getBalance">
+               <http:operation location="getBalance"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="fundTransfer">
+               <http:operation location="fundTransfer"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+            <wsdl:operation name="getAccount">
+               <http:operation location="getAccount"/>
+               <wsdl:input>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:input>
+               <wsdl:output>
+                  <mime:content type="text/xml" part="parameters"/>
+               </wsdl:output>
+            </wsdl:operation>
+         </wsdl:binding>
+         <wsdl:service name="CoreService">
+            <wsdl:port name="CoreServiceHttpsSoap11Endpoint"
+                       binding="ns:CoreServiceSoap11Binding">
+               <soap:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsSoap11Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceHttpSoap11Endpoint"
+                       binding="ns:CoreServiceSoap11Binding">
+               <soap:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpSoap11Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceLocalSoap11Endpoint"
+                       binding="ns:CoreServiceSoap11Binding">
+               <soap:address location="local:///services/CoreService.CoreServiceLocalSoap11Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceHttpsSoap12Endpoint"
+                       binding="ns:CoreServiceSoap12Binding">
+               <soap12:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsSoap12Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceHttpSoap12Endpoint"
+                       binding="ns:CoreServiceSoap12Binding">
+               <soap12:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpSoap12Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceLocalSoap12Endpoint"
+                       binding="ns:CoreServiceSoap12Binding">
+               <soap12:address location="local:///services/CoreService.CoreServiceLocalSoap12Endpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceHttpsEndpoint" binding="ns:CoreServiceHttpBinding">
+               <http:address location="https://10.224.215.189:9445/services/CoreService.CoreServiceHttpsEndpoint/"/>
+            </wsdl:port>
+            <wsdl:port name="CoreServiceHttpEndpoint" binding="ns:CoreServiceHttpBinding">
+               <http:address location="http://10.224.215.189:9765/services/CoreService.CoreServiceHttpEndpoint/"/>
+            </wsdl:port>
+         </wsdl:service>
+      </wsdl:definitions>
+   </publishWSDL>
+</proxy>

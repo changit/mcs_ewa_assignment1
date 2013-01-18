@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<proxy xmlns="http://ws.apache.org/ns/synapse"
+       name="PortalService"
+       transports="https http"
+       startOnLoad="true"
+       trace="disable">
+   <description/>
+   <target>
+      <endpoint>
+         <address uri="http://67.202.56.114:20081/portal-core/PortalService"
+                  format="soap11"/>
+      </endpoint>
+      <inSequence>
+         <log level="full"/>
+      </inSequence>
+      <outSequence>
+         <log level="full"/>
+         <send/>
+      </outSequence>
+   </target>
+   <publishWSDL uri="http://67.202.56.114:20081/portal-core/PortalService?wsdl"/>
+</proxy>
